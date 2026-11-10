@@ -1,0 +1,1585 @@
+{
+  "retriever_safe": true,
+  "queries": [
+    {
+      "query_id": "TEST90-0001",
+      "vendor": "Cisco",
+      "message": "Adapter uplink interface [id]/[id]/[id] link state: [linkState]. Please verify connectivity to Fabric Interconnect. Acknowledging FEX might be required.Adapter uplink interface [chassisId]/[slotId]/[id]/[id] link state: [linkState]. Please verify connectivity to Fabric Interconnect. Acknowledging chassis might be required."
+    },
+    {
+      "query_id": "TEST90-0002",
+      "vendor": "Cisco",
+      "message": "Fabric Interconnect [id], HA Cluster interconnect link failure"
+    },
+    {
+      "query_id": "TEST90-0003",
+      "vendor": "Cisco",
+      "message": "Fabric Interconnect [id], HA Cluster interconnect total link failure"
+    },
+    {
+      "query_id": "TEST90-0004",
+      "vendor": "Cisco",
+      "message": "IOM [chassisId]/[id] ([switchId]) current connectivity does not match discovery policy or connectivity is unsupported: [configState]"
+    },
+    {
+      "query_id": "TEST90-0005",
+      "vendor": "Cisco",
+      "message": "IOM [chassisId]/[id] ([switchId]) connectivity configuration: [configState]"
+    },
+    {
+      "query_id": "TEST90-0006",
+      "vendor": "Cisco",
+      "message": "[side] FI IOM [chassisId]/[id] ([switchId]) has a malformed FRU"
+    },
+    {
+      "query_id": "TEST90-0007",
+      "vendor": "Cisco",
+      "message": "[side] IOM [chassisId]/[id] ([switchId]) has a malformed FRU"
+    },
+    {
+      "query_id": "TEST90-0008",
+      "vendor": "Cisco",
+      "message": "Power supply [id] on chassis [id] has a malformed FRUPower supply [id] on server [id] has a malformed FRUPower supply [id] on rack-enclosure [id] has a malformed FRU"
+    },
+    {
+      "query_id": "TEST90-0009",
+      "vendor": "Cisco",
+      "message": "IOM [chassisId]/[id] ([switchId]) is auto upgrading firmware"
+    },
+    {
+      "query_id": "TEST90-0010",
+      "vendor": "Cisco",
+      "message": "Fabric Interconnect [id], management services are unresponsive"
+    },
+    {
+      "query_id": "TEST90-0011",
+      "vendor": "Cisco",
+      "message": "server pool [name] is empty"
+    },
+    {
+      "query_id": "TEST90-0012",
+      "vendor": "Cisco",
+      "message": "Buffer Unit [id] on server [chassisId]/[slotId] temperature: [thermal]Buffer Unit [id] on server [id] temperature: [thermal]Buffer Unit [id] on server [chassisId]/[slotId]/[serverInstanceId] temperature: [thermal]"
+    },
+    {
+      "query_id": "TEST90-0013",
+      "vendor": "Cisco",
+      "message": "[transport] port [portId] on chassis [id] role : [ifRole] transceiver type:[xcvrType][transport] port [slotId]/[aggrPortId]/[portId] on fabric interconnect [id] role : [ifRole] transceiver type:[xcvrType][transport] port [slotId]/[portId] on fabric interconnect [id] role : [ifRole] transceiver type:[xcvrType]"
+    },
+    {
+      "query_id": "TEST90-0014",
+      "vendor": "Cisco",
+      "message": "Connection to Management Port [id] in server [id] is missing"
+    },
+    {
+      "query_id": "TEST90-0015",
+      "vendor": "Cisco",
+      "message": "Member [slotId]/[portId] cannot be added to SAN Port-Channel [portId] on fabric interconnect [id], reason: [membership]"
+    },
+    {
+      "query_id": "TEST90-0016",
+      "vendor": "Cisco",
+      "message": "Fex [id] has an invalid FRU"
+    },
+    {
+      "query_id": "TEST90-0017",
+      "vendor": "Cisco",
+      "message": "Firmware on blade [chassisId]/[slotId] does not allow chassis level power capping. Please consider upgrading to at least 1.4 version"
+    },
+    {
+      "query_id": "TEST90-0018",
+      "vendor": "Cisco",
+      "message": "Activation failed and Activate Status set to failed."
+    },
+    {
+      "query_id": "TEST90-0019",
+      "vendor": "Cisco",
+      "message": "Power supply [id] in chassis [id] shutdown reason:[powerStateQualifier]"
+    },
+    {
+      "query_id": "TEST90-0020",
+      "vendor": "Cisco",
+      "message": "FlexFlash Virtual Drive RAID degraded on server [chassisId]/[slotId]. Reason: [raidState]FlexFlash Virtual Drive RAID degraded on server [id]. Reason: [raidState]"
+    },
+    {
+      "query_id": "TEST90-0021",
+      "vendor": "Cisco",
+      "message": "FlexFlash Virtual Drive on server [chassisId]/[slotId] is inoperable. Reason: [raidState]FlexFlash Virtual Drive on server [id] is inoperable. Reason: [raidState]"
+    },
+    {
+      "query_id": "TEST90-0022",
+      "vendor": "Cisco",
+      "message": "[side] FI IOM [chassisId]/[id] ([switchId]) processor temperature exceeded the limit"
+    },
+    {
+      "query_id": "TEST90-0023",
+      "vendor": "Cisco",
+      "message": "Virtual drive [name] mismatch. Reason: [configQualifierReason]"
+    },
+    {
+      "query_id": "TEST90-0024",
+      "vendor": "Cisco",
+      "message": "device [chassis1], error connecting to shared-storage management interface"
+    },
+    {
+      "query_id": "TEST90-0025",
+      "vendor": "Cisco",
+      "message": "device [chassis2], error connecting to shared-storage management interface"
+    },
+    {
+      "query_id": "TEST90-0026",
+      "vendor": "Cisco",
+      "message": "device [chassis3], error connecting to shared-storage management interface"
+    },
+    {
+      "query_id": "TEST90-0027",
+      "vendor": "Cisco",
+      "message": "One or more of the Backplane Ports are not up in FEX [id] connected to FI [switchId]"
+    },
+    {
+      "query_id": "TEST90-0028",
+      "vendor": "Cisco",
+      "message": "One or more of the Backplane Ports are not up in IOM [chassisId]/[id] connected to FI [switchId]"
+    },
+    {
+      "query_id": "TEST90-0029",
+      "vendor": "Cisco",
+      "message": "Slot [id]/[id]/[id] ownership is automatically unassigned since the controller(s) does not support chassis global hot spare."
+    },
+    {
+      "query_id": "TEST90-0030",
+      "vendor": "Cisco",
+      "message": "Mismatch in PCIe configuration of the chassis adapters"
+    },
+    {
+      "query_id": "TEST90-0031",
+      "vendor": "Cisco",
+      "message": "Unsupported configuration is found in server [id]. Reason: Mixing MSwitch with SAS/SATA controller is not supported."
+    },
+    {
+      "query_id": "TEST90-0032",
+      "vendor": "Cisco",
+      "message": "PCIe Adapter [id] in server [id] is unsecure"
+    },
+    {
+      "query_id": "TEST90-0033",
+      "vendor": "Cisco",
+      "message": "Endpoint FPGA firmware Unsecured."
+    },
+    {
+      "query_id": "TEST90-0034",
+      "vendor": "Cisco",
+      "message": "Unable to install Static MAC on VIF [id] of switch [switchId] as Static MAC limit reached or exceeded"
+    },
+    {
+      "query_id": "TEST90-0035",
+      "vendor": "Cisco",
+      "message": "Unable to validate adapter([id]) in server [id] due to communication errors. Please contact CISCO technical support.Unable to validate adapter([id]) in server [chassisId]/[slotId] due to communication errors. Please contact CISCO technical support."
+    },
+    {
+      "query_id": "TEST90-0036",
+      "vendor": "Cisco",
+      "message": "Cos value for this priority is set to 3, please change the Cos vlaue. Cos 3 is reserved for Fibre Channel. Using Cos 3 for this class will result in conflict and Fibre Channel Qos will not work properly."
+    },
+    {
+      "query_id": "TEST90-0037",
+      "vendor": "Dell",
+      "message": "Unable to detect arg1 OSFP cards that are required for correct operation."
+    },
+    {
+      "query_id": "TEST90-0038",
+      "vendor": "Dell",
+      "message": "System Service Tag not present."
+    },
+    {
+      "query_id": "TEST90-0039",
+      "vendor": "Dell",
+      "message": "Write policy on arg1 was changed to Write Through."
+    },
+    {
+      "query_id": "TEST90-0040",
+      "vendor": "Dell",
+      "message": "The Multi-Chassis Management group lead redundancy is lost because of either network issues or firmware version mismatch."
+    },
+    {
+      "query_id": "TEST90-0041",
+      "vendor": "Dell",
+      "message": "Unable to retrieve details from NIC identifier for the partition arg1 because the network arg2 does not exist."
+    },
+    {
+      "query_id": "TEST90-0042",
+      "vendor": "Dell",
+      "message": "Unable to perform the Ethernet - No Spanning Tree uplink creation operation, because the firmware version of the I/O Module running the Fabric Manager does not support the configuration feature."
+    },
+    {
+      "query_id": "TEST90-0043",
+      "vendor": "Dell",
+      "message": "Unable to retrieve the server-arg1 memory information."
+    },
+    {
+      "query_id": "TEST90-0044",
+      "vendor": "Dell",
+      "message": "CPU arg1 failed to initialize."
+    },
+    {
+      "query_id": "TEST90-0045",
+      "vendor": "Dell",
+      "message": "Uncorrectable Machine Check Exception detected on CPU arg1."
+    },
+    {
+      "query_id": "TEST90-0046",
+      "vendor": "Dell",
+      "message": "CPU bus initialization error detected."
+    },
+    {
+      "query_id": "TEST90-0047",
+      "vendor": "Dell",
+      "message": "A processor Machine Check event occurred because the CPU detected an error in an external device (arg1, arg2)."
+    },
+    {
+      "query_id": "TEST90-0048",
+      "vendor": "Dell",
+      "message": "CPU interconnect arg1 has a correctable error."
+    },
+    {
+      "query_id": "TEST90-0049",
+      "vendor": "Dell",
+      "message": "Unable to read the Processor Information ROM (PIROM) data of the CPU arg1 because of communication error."
+    },
+    {
+      "query_id": "TEST90-0050",
+      "vendor": "Dell",
+      "message": "Unable to add the devices arg1 to the system profile group because by default the devices will be automatically added to the group based on the BIOS configured on the device system profile."
+    },
+    {
+      "query_id": "TEST90-0051",
+      "vendor": "Dell",
+      "message": "Unable to remove the devices arg1 from the system profile group because by default the devices will be automatically removed from the group based on the BIOS configured on the device system profile."
+    },
+    {
+      "query_id": "TEST90-0052",
+      "vendor": "Dell",
+      "message": "Unable to update the RAID controller arg1 firmware version because of an error in erasing the previous RAID controller firmware version (Flash Erase Error)."
+    },
+    {
+      "query_id": "TEST90-0053",
+      "vendor": "Dell",
+      "message": "An invalid SAS configuration has been detected on arg1. Details: arg2"
+    },
+    {
+      "query_id": "TEST90-0054",
+      "vendor": "Dell",
+      "message": "Unable to update the RAID controller arg1 firmware version because of an issue detected in the firmware image file during the verification process."
+    },
+    {
+      "query_id": "TEST90-0055",
+      "vendor": "Dell",
+      "message": "The storage controller arg1 mode is unsupported by the iDRAC version currently installed."
+    },
+    {
+      "query_id": "TEST90-0056",
+      "vendor": "Dell",
+      "message": "arg1 SAS expander error: arg2"
+    },
+    {
+      "query_id": "TEST90-0057",
+      "vendor": "Dell",
+      "message": "Previous configuration was found completely missing during boot time on arg1."
+    },
+    {
+      "query_id": "TEST90-0058",
+      "vendor": "Dell",
+      "message": "Bad block medium error on arg1."
+    },
+    {
+      "query_id": "TEST90-0059",
+      "vendor": "Dell",
+      "message": "Bad block extended sense error on arg1."
+    },
+    {
+      "query_id": "TEST90-0060",
+      "vendor": "Dell",
+      "message": "Unable to retrieve rollback information because the entered device ID is empty or invalid."
+    },
+    {
+      "query_id": "TEST90-0061",
+      "vendor": "Dell",
+      "message": "A self-serviceable event is detected on the CXL device at PCIe slot arg1, segment arg2. arg3."
+    },
+    {
+      "query_id": "TEST90-0062",
+      "vendor": "Dell",
+      "message": "A self-serviceable event is detected on the CXL device at drive or module bay arg1, slot arg2, segment arg3. arg4."
+    },
+    {
+      "query_id": "TEST90-0063",
+      "vendor": "Dell",
+      "message": "System board - CMOS, Location = arg1h, Expected = arg2h, Found = arg3h."
+    },
+    {
+      "query_id": "TEST90-0064",
+      "vendor": "Dell",
+      "message": "System board - HPET arg1, incorrect time period. Expected = arg2, Found = arg3."
+    },
+    {
+      "query_id": "TEST90-0065",
+      "vendor": "Dell",
+      "message": "BIOS - A20 gate not enabled."
+    },
+    {
+      "query_id": "TEST90-0066",
+      "vendor": "Dell",
+      "message": "Cables - Check the following cable, jumper, connection, or sensor: arg1."
+    },
+    {
+      "query_id": "TEST90-0067",
+      "vendor": "Dell",
+      "message": "Memory - Memory error detect."
+    },
+    {
+      "query_id": "TEST90-0068",
+      "vendor": "Dell",
+      "message": "Battery - Battery issue detected."
+    },
+    {
+      "query_id": "TEST90-0069",
+      "vendor": "Dell",
+      "message": "Fan - Unable to determine fan speeds."
+    },
+    {
+      "query_id": "TEST90-0070",
+      "vendor": "Dell",
+      "message": "PCIe - PCI device in physical Slot arg1, PCI Tag arg2, is present but not responding."
+    },
+    {
+      "query_id": "TEST90-0071",
+      "vendor": "Dell",
+      "message": "PCIe - Speed slow PCI Tag-arg1 VendorID-arg2 DeviceID-arg3SVid-arg4SDid-arg5 Bus arg6: Link Trained xarg7, Speed Max arg8 GT/s, Neg arg9 GT/s, Slow Slot arg10."
+    },
+    {
+      "query_id": "TEST90-0072",
+      "vendor": "Dell",
+      "message": "The arg1 has a bad sensor arg2."
+    },
+    {
+      "query_id": "TEST90-0073",
+      "vendor": "Dell",
+      "message": "Fan arg1 RPM is greater than the upper critical threshold."
+    },
+    {
+      "query_id": "TEST90-0074",
+      "vendor": "Dell",
+      "message": "Fan arg1 is removed."
+    },
+    {
+      "query_id": "TEST90-0075",
+      "vendor": "Dell",
+      "message": "Enhanced Cooling Mode is not supported for fan arg1."
+    },
+    {
+      "query_id": "TEST90-0076",
+      "vendor": "Dell",
+      "message": "arg1 fan arg2 requires attention for optimal performance."
+    },
+    {
+      "query_id": "TEST90-0077",
+      "vendor": "Dell",
+      "message": "SCSI Target FibreChannel Port arg1 encountered an error, resulting in the generation of a core for the HBA."
+    },
+    {
+      "query_id": "TEST90-0078",
+      "vendor": "Dell",
+      "message": "SCSI Target FibreChannel Port arg1 encountered an error and was unable to load firmware for the HBA. Disabling port arg2."
+    },
+    {
+      "query_id": "TEST90-0079",
+      "vendor": "Dell",
+      "message": "The device arg1 is unable to join the iDRAC local group arg2 because an incompatible iDRAC firmware version is detected on the local group leader."
+    },
+    {
+      "query_id": "TEST90-0080",
+      "vendor": "Dell",
+      "message": "Unable to start iDRAC or BMC because the HPM (processor system board) FRU device ID does not match the HPM FPGA/programmable. See the message arg1."
+    },
+    {
+      "query_id": "TEST90-0081",
+      "vendor": "Dell",
+      "message": "Unable to complete the operation as there is no response from iDRAC."
+    },
+    {
+      "query_id": "TEST90-0082",
+      "vendor": "Dell",
+      "message": "Internal error while retrieving update information."
+    },
+    {
+      "query_id": "TEST90-0083",
+      "vendor": "Dell",
+      "message": "A fabric mismatch detected for mezzanine card arg1."
+    },
+    {
+      "query_id": "TEST90-0084",
+      "vendor": "Dell",
+      "message": "The IO Module in slot arg1 requires a power cycle."
+    },
+    {
+      "query_id": "TEST90-0085",
+      "vendor": "Dell",
+      "message": "Power fault detected on PCIE adapter arg1 in arg2 arg3."
+    },
+    {
+      "query_id": "TEST90-0086",
+      "vendor": "Dell",
+      "message": "Unable to allocate arg1 WATTS for discovery of PCIE adapters."
+    },
+    {
+      "query_id": "TEST90-0087",
+      "vendor": "Dell",
+      "message": "Invalid NIC IP address parameter specified."
+    },
+    {
+      "query_id": "TEST90-0088",
+      "vendor": "Dell",
+      "message": "DDFS is disabled due to a problem with the NVRAM subsystem."
+    },
+    {
+      "query_id": "TEST90-0089",
+      "vendor": "Dell",
+      "message": "Unable to complete the self-heal operation of the memory in the DIMM installed in arg1 because of internal issues. Replace the DIMM during the next planned service operation."
+    },
+    {
+      "query_id": "TEST90-0090",
+      "vendor": "Dell",
+      "message": "An unknown critical diagnostic event occurred in the memory device at arg1. (Extended ID: arg2)."
+    },
+    {
+      "query_id": "TEST90-0091",
+      "vendor": "Dell",
+      "message": "Intel SMI 2 Memory interconnect arg1 has a correctable error."
+    },
+    {
+      "query_id": "TEST90-0092",
+      "vendor": "Dell",
+      "message": "Correctable memory error rate exceeded for Dual In-line Memory Module (DIMM) arg1."
+    },
+    {
+      "query_id": "TEST90-0093",
+      "vendor": "Dell",
+      "message": "The Non-Volatile Dual In-line Memory Module (NVDIMM) device in the slot arg1 is unable to save the data during the previous system shutdown operation or power loss."
+    },
+    {
+      "query_id": "TEST90-0094",
+      "vendor": "Dell",
+      "message": "The Non-Volatile Dual In-line Memory Module (NVDIMM) device in the slot arg1 is unable to restore the data that was saved in the previous save operation."
+    },
+    {
+      "query_id": "TEST90-0095",
+      "vendor": "Dell",
+      "message": "Unable to validate the SmartFabric because the VLTi cable for link arg1 is not connected as per fabric design arg2."
+    },
+    {
+      "query_id": "TEST90-0096",
+      "vendor": "Dell",
+      "message": "Unable to set the BIOS password because of a jumper setting on the motherboard."
+    },
+    {
+      "query_id": "TEST90-0097",
+      "vendor": "Dell",
+      "message": "Unable to configure Forward Error Correction (FEC) because the I/O Module (IOM) is not in SmartFabric mode."
+    },
+    {
+      "query_id": "TEST90-0098",
+      "vendor": "Dell",
+      "message": "Predictive failure reported for arg1"
+    },
+    {
+      "query_id": "TEST90-0099",
+      "vendor": "Dell",
+      "message": "The PCIe device arg1 temperature is currently arg2 degrees Celsius, which is higher than the critical threshold temperature value arg3 degrees Celsius. Part Number = arg4."
+    },
+    {
+      "query_id": "TEST90-0100",
+      "vendor": "Dell",
+      "message": "The PCIe device arg1 temperature is currently arg2 degrees Celsius, which is higher than the warning threshold temperature value arg3 degrees Celsius. Part Number = arg4."
+    },
+    {
+      "query_id": "TEST90-0101",
+      "vendor": "Dell",
+      "message": "The PCIe Controller arg1 is unable to do PCIe training for the Physical Disk arg2."
+    },
+    {
+      "query_id": "TEST90-0102",
+      "vendor": "Dell",
+      "message": "arg1 is a solid state drive (SSD) that is not supported by the controller."
+    },
+    {
+      "query_id": "TEST90-0103",
+      "vendor": "Dell",
+      "message": "Copyback task to arg1 has failed."
+    },
+    {
+      "query_id": "TEST90-0104",
+      "vendor": "Dell",
+      "message": "A block on arg1 was punctured by the controller."
+    },
+    {
+      "query_id": "TEST90-0105",
+      "vendor": "Dell",
+      "message": "The global hot-spare drive arg1 does not cover all the virtual drives (VDs) available on the controller."
+    },
+    {
+      "query_id": "TEST90-0106",
+      "vendor": "Dell",
+      "message": "Bad block table on arg1 is 80% full."
+    },
+    {
+      "query_id": "TEST90-0107",
+      "vendor": "Dell",
+      "message": "Bad block table on arg1 is full. Unable to log block arg2."
+    },
+    {
+      "query_id": "TEST90-0108",
+      "vendor": "Dell",
+      "message": "arg1 is offline."
+    },
+    {
+      "query_id": "TEST90-0109",
+      "vendor": "Dell",
+      "message": "The rebuild failed due to errors on the target arg1."
+    },
+    {
+      "query_id": "TEST90-0110",
+      "vendor": "Dell",
+      "message": "Bad block table on arg1 is full. Part Number = arg2"
+    },
+    {
+      "query_id": "TEST90-0111",
+      "vendor": "Dell",
+      "message": "System management interrupt initialization failed."
+    },
+    {
+      "query_id": "TEST90-0112",
+      "vendor": "Dell",
+      "message": "System BIOS has halted."
+    },
+    {
+      "query_id": "TEST90-0113",
+      "vendor": "Dell",
+      "message": "General failure after video."
+    },
+    {
+      "query_id": "TEST90-0114",
+      "vendor": "Dell",
+      "message": "The power input for power supply arg1 is outside of range."
+    },
+    {
+      "query_id": "TEST90-0115",
+      "vendor": "Dell",
+      "message": "Power supply arg1 is operating at 110 volts, and could cause a circuit breaker fault."
+    },
+    {
+      "query_id": "TEST90-0116",
+      "vendor": "Dell",
+      "message": "Cannot communicate with power supply arg1."
+    },
+    {
+      "query_id": "TEST90-0117",
+      "vendor": "Dell",
+      "message": "Power supply arg1 vendor type mismatch detected."
+    },
+    {
+      "query_id": "TEST90-0118",
+      "vendor": "Dell",
+      "message": "Power supply arg1 status is unknown."
+    },
+    {
+      "query_id": "TEST90-0119",
+      "vendor": "Dell",
+      "message": "Unable to retrieve PSU arg1 input voltage information."
+    },
+    {
+      "query_id": "TEST90-0120",
+      "vendor": "Dell",
+      "message": "arg1, PSUarg2 firmware update is in progress."
+    },
+    {
+      "query_id": "TEST90-0121",
+      "vendor": "Dell",
+      "message": "PSU arg1 reported input under voltage fault and has been turned off."
+    },
+    {
+      "query_id": "TEST90-0122",
+      "vendor": "Dell",
+      "message": "The Power Supply Unit arg1 reported input overcurrent fault and has been turned off."
+    },
+    {
+      "query_id": "TEST90-0123",
+      "vendor": "Dell",
+      "message": "Unable to turn on the server because a PCIe card or Mezzanine card is not installed."
+    },
+    {
+      "query_id": "TEST90-0124",
+      "vendor": "Dell",
+      "message": "Server arg1 power inventory is not valid. Power inventory reading is Max Power=arg2 AC Watt, Min Power=arg3 AC Watt, Allocated Power=arg4 AC Watt."
+    },
+    {
+      "query_id": "TEST90-0125",
+      "vendor": "Dell",
+      "message": "Successfully completed the iDRAC firmware update. All current user sessions will be closed."
+    },
+    {
+      "query_id": "TEST90-0126",
+      "vendor": "Dell",
+      "message": "This setting will be applied during the next server restart. If the setting is not compatible with the RAID Controller, then LED status indicators on all the associated hard disk drives (HDDs) stop functioning."
+    },
+    {
+      "query_id": "TEST90-0127",
+      "vendor": "Dell",
+      "message": "Invalid value for Minimum Fan Speed."
+    },
+    {
+      "query_id": "TEST90-0128",
+      "vendor": "Dell",
+      "message": "The Secure Erase command will be executed on the selected PCIe SSD disk drives(s) only after the reboot of the system or loss of power to the disk drives(s)."
+    },
+    {
+      "query_id": "TEST90-0129",
+      "vendor": "Dell",
+      "message": "The BIOS watchdog timer must be disabled if the Automatic System Recovery option is enabled."
+    },
+    {
+      "query_id": "TEST90-0130",
+      "vendor": "Dell",
+      "message": "Unable to access the USB NIC IP address by using PING process."
+    },
+    {
+      "query_id": "TEST90-0131",
+      "vendor": "Dell",
+      "message": "Unable to change the auto-negotiation state for the current NIC selection mode."
+    },
+    {
+      "query_id": "TEST90-0132",
+      "vendor": "Dell",
+      "message": "Unable to add the FQDD to the PCIe Vendor Defined Message (VDM) deny list because the list is full."
+    },
+    {
+      "query_id": "TEST90-0133",
+      "vendor": "Dell",
+      "message": "The entered option is not supported by the interface."
+    },
+    {
+      "query_id": "TEST90-0134",
+      "vendor": "Dell",
+      "message": "Unable to complete the operation because the Secure Boot policy is of unknown type."
+    },
+    {
+      "query_id": "TEST90-0135",
+      "vendor": "Dell",
+      "message": "Unable to update the arg1 firmware because of connection issues. Code arg2."
+    },
+    {
+      "query_id": "TEST90-0136",
+      "vendor": "Dell",
+      "message": "Invalid object value specified."
+    },
+    {
+      "query_id": "TEST90-0137",
+      "vendor": "Dell",
+      "message": "arg1 value has dropped below the lower warning limit."
+    },
+    {
+      "query_id": "TEST90-0138",
+      "vendor": "Dell",
+      "message": "arg1 value has exceeded the upper warning limit."
+    },
+    {
+      "query_id": "TEST90-0139",
+      "vendor": "Dell",
+      "message": "Unable to update the firmware version because the license version of the currently installed firmware does not allow the update process."
+    },
+    {
+      "query_id": "TEST90-0140",
+      "vendor": "Dell",
+      "message": "The reinstallfw command has failed due to unavailability of the firmware image."
+    },
+    {
+      "query_id": "TEST90-0141",
+      "vendor": "Dell",
+      "message": "Removable Flash Media is not ready."
+    },
+    {
+      "query_id": "TEST90-0142",
+      "vendor": "Dell",
+      "message": "Processor detected a problem while performing an Intel Trusted Execution Technology (TXT) operation."
+    },
+    {
+      "query_id": "TEST90-0143",
+      "vendor": "Dell",
+      "message": "BIOS Authenticated Code Module detected an Intel Trusted Execution Technology (TXT) problem during POST."
+    },
+    {
+      "query_id": "TEST90-0144",
+      "vendor": "Dell",
+      "message": "Unable to complete the Key Purge operation at the KMS because either iDRAC could not communicate to the KMS or failed to locate the keys. arg1 keys are successfully purged. arg2 could not be purged."
+    },
+    {
+      "query_id": "TEST90-0145",
+      "vendor": "Dell",
+      "message": "iDRAC is unable to do a PSID based revert on the device arg1. Error response arg2."
+    },
+    {
+      "query_id": "TEST90-0146",
+      "vendor": "Dell",
+      "message": "iDRAC has used the cached key because iDRAC could not connect to the Key Management Server."
+    },
+    {
+      "query_id": "TEST90-0147",
+      "vendor": "Dell",
+      "message": "The performance of CPUarg1 is automatically readjusted by Chassis Controller because of unacceptable change in the thermal and power conditions."
+    },
+    {
+      "query_id": "TEST90-0148",
+      "vendor": "Dell",
+      "message": "Unable to synchronize arg1 Settings between arg2. Power loss detection redundancy is degraded."
+    },
+    {
+      "query_id": "TEST90-0149",
+      "vendor": "Dell",
+      "message": "A firmware mismatch detected in arg1."
+    },
+    {
+      "query_id": "TEST90-0150",
+      "vendor": "Dell",
+      "message": "A firmware version mismatch is detected between two hot-swappable expanders within the Storage enclosure."
+    },
+    {
+      "query_id": "TEST90-0151",
+      "vendor": "Dell",
+      "message": "No batteries are displayed."
+    },
+    {
+      "query_id": "TEST90-0152",
+      "vendor": "Dell",
+      "message": "Temperature probes are not connected to enclosures or data about temperature is unavailable."
+    },
+    {
+      "query_id": "TEST90-0153",
+      "vendor": "Dell",
+      "message": "Unable to monitor or manage SAS components because the initialization sequence of the devices did not complete."
+    },
+    {
+      "query_id": "TEST90-0154",
+      "vendor": "Dell",
+      "message": "No RAID levels are supported."
+    },
+    {
+      "query_id": "TEST90-0155",
+      "vendor": "Dell",
+      "message": "One or more physical disks specified are full and cannot be used to create additional virtual disks."
+    },
+    {
+      "query_id": "TEST90-0156",
+      "vendor": "Dell",
+      "message": "Unable to change the controller mode because there are already pending operations."
+    },
+    {
+      "query_id": "TEST90-0157",
+      "vendor": "Dell",
+      "message": "Unable to change the controller unmap state because there are already pending operations."
+    },
+    {
+      "query_id": "TEST90-0158",
+      "vendor": "Dell",
+      "message": "Unable to change controller mode while Virtual Disks and/or Hotspares are present on the controller."
+    },
+    {
+      "query_id": "TEST90-0159",
+      "vendor": "Dell",
+      "message": "Controller is in HBA mode, RaidAction CreateAuto value is not supported."
+    },
+    {
+      "query_id": "TEST90-0160",
+      "vendor": "Dell",
+      "message": "Unable to perform the reconfiguration operation because the storage controller does not support reconfiguration of a Virtual Disk that is part of a disk group that has multiple Virtual Disks."
+    },
+    {
+      "query_id": "TEST90-0161",
+      "vendor": "Dell",
+      "message": "Unable to perform the reconfiguration operation because the number of physical disks specified in the disk group is not as per the permitted range."
+    },
+    {
+      "query_id": "TEST90-0162",
+      "vendor": "Dell",
+      "message": "Unable to update the firmware on the arg1 controller because one or more of the following reasons: a) Mismatch in the image file key. b) Unsuccessful authentication. c) Incorrect checksum value."
+    },
+    {
+      "query_id": "TEST90-0163",
+      "vendor": "Dell",
+      "message": "Unable to locate firmware image file in specified path."
+    },
+    {
+      "query_id": "TEST90-0164",
+      "vendor": "Dell",
+      "message": "Unable to update the firmware version because one or more features that do not support the Firmware Update feature are currently enabled."
+    },
+    {
+      "query_id": "TEST90-0165",
+      "vendor": "Dell",
+      "message": "Unable to install update packages because of insufficient space in the iDRAC."
+    },
+    {
+      "query_id": "TEST90-0166",
+      "vendor": "Dell",
+      "message": "Unable to recover the arg1 firmware data from the USB drive. See the message:SUP0702."
+    },
+    {
+      "query_id": "TEST90-0167",
+      "vendor": "Dell",
+      "message": "A firmware or software incompatibility is detected between arg1arg2 and arg3arg4."
+    },
+    {
+      "query_id": "TEST90-0168",
+      "vendor": "Dell",
+      "message": "BIOS image verification failed."
+    },
+    {
+      "query_id": "TEST90-0169",
+      "vendor": "Dell",
+      "message": "Unable to update the firmware of the chassis Power Supply Unit (PSU) because one or more sleds installed on the chassis are currently powered on."
+    },
+    {
+      "query_id": "TEST90-0170",
+      "vendor": "Dell",
+      "message": "iDRAC cannot authenticate the LOM firmware because of an internal issue."
+    },
+    {
+      "query_id": "TEST90-0171",
+      "vendor": "Dell",
+      "message": "Unable to complete the CPLD auto-recovery operation because of an internal error."
+    },
+    {
+      "query_id": "TEST90-0172",
+      "vendor": "Dell",
+      "message": "Unable to authenticate the arg1 firmware because of an internal issue."
+    },
+    {
+      "query_id": "TEST90-0173",
+      "vendor": "Dell",
+      "message": "The firmware update operation of the iDRAC on the server in slot arg1 was stopped. The selected Image file is not compatible with the server hardware."
+    },
+    {
+      "query_id": "TEST90-0174",
+      "vendor": "Dell",
+      "message": "Unable to update the PSU firmware, because the Image file is not accessible. ErrorCode=0xarg1."
+    },
+    {
+      "query_id": "TEST90-0175",
+      "vendor": "Dell",
+      "message": "Invalid firmware: The uploaded firmware image validation was unsuccessful."
+    },
+    {
+      "query_id": "TEST90-0176",
+      "vendor": "Dell",
+      "message": "Unable to downgrade the firmware version because the Federal Information Processing Standard (FIPS) mode is enabled on Chassis Management Controller (CMC)."
+    },
+    {
+      "query_id": "TEST90-0177",
+      "vendor": "Dell",
+      "message": "The firmware update operation did not complete successfully."
+    },
+    {
+      "query_id": "TEST90-0178",
+      "vendor": "Dell",
+      "message": "Unable to retrieve TTY log data because no storage controllers are detected in the server."
+    },
+    {
+      "query_id": "TEST90-0179",
+      "vendor": "Dell",
+      "message": "Unable to add the firmware inventory because of internal issue identified in arg1."
+    },
+    {
+      "query_id": "TEST90-0180",
+      "vendor": "Dell",
+      "message": "Unable to authenticate the arg1 firmware payload because either the payload is not signed or the payload is signed with an incorrect SSH key."
+    },
+    {
+      "query_id": "TEST90-0181",
+      "vendor": "Dell",
+      "message": "A Watchdog event occurred on the Enclosed Rear Door Heat Exchanger(eRDHx) fan controller arg1."
+    },
+    {
+      "query_id": "TEST90-0182",
+      "vendor": "Dell",
+      "message": "CPU Exception Type 0x03: Breakpoint (Software)."
+    },
+    {
+      "query_id": "TEST90-0183",
+      "vendor": "Dell",
+      "message": "CPU Exception Type 0x0A: Invalid Task Segment State Segment (TSS) (Software)."
+    },
+    {
+      "query_id": "TEST90-0184",
+      "vendor": "Dell",
+      "message": "CPU Exception Type 0x0D: General Protection (Software)."
+    },
+    {
+      "query_id": "TEST90-0185",
+      "vendor": "Dell",
+      "message": "Lifecycle Controller (LC) is unable to complete a requested task or function and prevented the boot process from completing on multiple attempts. LC is in Recovery Mode."
+    },
+    {
+      "query_id": "TEST90-0186",
+      "vendor": "Dell",
+      "message": "Unable to communicate with iDRAC because of an issue in the iDRAC Shared Memory Architecture (SMA) Intelligent Platform Management Interface (IPMI)."
+    },
+    {
+      "query_id": "TEST90-0187",
+      "vendor": "Dell",
+      "message": "Unable to communicate with iDRAC because of an issue in the iDRAC Keyboard Controller Style (KCS) Intelligent Platform Management Interface (IPMI)."
+    },
+    {
+      "query_id": "TEST90-0188",
+      "vendor": "Dell",
+      "message": "Unable to enable the Trusted Execution Technology (TXT) feature because arg1 does not support TXT."
+    },
+    {
+      "query_id": "TEST90-0189",
+      "vendor": "Dell",
+      "message": "The mezzanine card configuration used is not supported on this Chassis."
+    },
+    {
+      "query_id": "TEST90-0190",
+      "vendor": "Dell",
+      "message": "Unable to boot arg1 because of the Secure Boot policy."
+    },
+    {
+      "query_id": "TEST90-0191",
+      "vendor": "Dell",
+      "message": "PCIe link speed is not optimal for arg1. Expected link speed: Gen arg2 and actual link speed: Gen arg3."
+    },
+    {
+      "query_id": "TEST90-0192",
+      "vendor": "Dell",
+      "message": "A Quad-Rank (QR) DIMM is installed on memory slot: arg1. QR DIMMs should be installed on the first DIMM slot in a channel if there is only one QR DIMM in the channel. QR DIMMs cannot be installed on the third slot of the channel."
+    },
+    {
+      "query_id": "TEST90-0193",
+      "vendor": "Dell",
+      "message": "Unable to enable the Memory Mirroring feature because of mismatches in the DIMM channel configurations."
+    },
+    {
+      "query_id": "TEST90-0194",
+      "vendor": "Dell",
+      "message": "Unable to enter System Service Mode (SSM) because the Lifecycle Controller (LC) firmware was not accessible."
+    },
+    {
+      "query_id": "TEST90-0195",
+      "vendor": "Dell",
+      "message": "Unable to find the Dell Processor Acceleration Technology (DPAT) Enterprise license after three consecutive boots. The Dell Controlled Turbo BIOS setup configuration is being reverted to default because of the absent license."
+    },
+    {
+      "query_id": "TEST90-0196",
+      "vendor": "Dell",
+      "message": "Unable to find the Dell Processor Acceleration Technology (DPAT) Enterprise license after three consecutive boots. The Number of Cores per Processor BIOS setup configuration is being reverted to default because of the absent license."
+    },
+    {
+      "query_id": "TEST90-0197",
+      "vendor": "Dell",
+      "message": "Quick Path Interconnect (QPI) initialization error detected."
+    },
+    {
+      "query_id": "TEST90-0198",
+      "vendor": "Dell",
+      "message": "Quick Path Interconnect (QPI) link initialization error detected."
+    },
+    {
+      "query_id": "TEST90-0199",
+      "vendor": "Dell",
+      "message": "Unable to complete the operation because the R920 I/O riser is not supported."
+    },
+    {
+      "query_id": "TEST90-0200",
+      "vendor": "Dell",
+      "message": "The Remaining Rated Endurance value of NVDIMM installed in slot arg1 is less than or equal to 1%."
+    },
+    {
+      "query_id": "TEST90-0201",
+      "vendor": "Dell",
+      "message": "Unable to apply the Persistent Memory (PM) region configuration of the NVDIMM in the memory slot arg1."
+    },
+    {
+      "query_id": "TEST90-0202",
+      "vendor": "Dell",
+      "message": "Unable to use the Persistent Memory (PM) region configuration of the NVDIMM in the memory slot arg1."
+    },
+    {
+      "query_id": "TEST90-0203",
+      "vendor": "Dell",
+      "message": "Unable to complete the Overwrite DIMM operation on the Intel Persistent Memory DIMM with serial number arg1 in slot arg2."
+    },
+    {
+      "query_id": "TEST90-0204",
+      "vendor": "Dell",
+      "message": "Unable to complete the Create Goal operation on the Intel Persistent Memory DIMMs."
+    },
+    {
+      "query_id": "TEST90-0205",
+      "vendor": "Dell",
+      "message": "The Remaining Rated Endurance value of the NVDIMM installed in slot arg1 is equal to 0%."
+    },
+    {
+      "query_id": "TEST90-0206",
+      "vendor": "Dell",
+      "message": "The NVDIMM installed in slot arg1 requires a maintenance."
+    },
+    {
+      "query_id": "TEST90-0207",
+      "vendor": "Dell",
+      "message": "All the NVDIMMs are disabled because the installed processor does not support the Intel Persistent Memory DIMMs."
+    },
+    {
+      "query_id": "TEST90-0208",
+      "vendor": "Dell",
+      "message": "All NVDIMMs are disabled because certain security policies have been enabled on the system."
+    },
+    {
+      "query_id": "TEST90-0209",
+      "vendor": "Dell",
+      "message": "Unable to enable the HBM Cache Mode on the socket arg1 because the ratio of HBM capacity to the DDR memory capacity is not supported."
+    },
+    {
+      "query_id": "TEST90-0210",
+      "vendor": "Dell",
+      "message": "The UEFI driver of the arg1 (Vendor ID: arg2, Device ID: arg3) in arg4, is indicating the status as Failed."
+    },
+    {
+      "query_id": "TEST90-0211",
+      "vendor": "Dell",
+      "message": "Unrecoverable storage medium error detected on arg1."
+    },
+    {
+      "query_id": "TEST90-0212",
+      "vendor": "Dell",
+      "message": "arg1 initialization is terminated."
+    },
+    {
+      "query_id": "TEST90-0213",
+      "vendor": "Dell",
+      "message": "The mezzanine card arg1 arg2 voltage is outside of range."
+    },
+    {
+      "query_id": "TEST90-0214",
+      "vendor": "Dell",
+      "message": "CPU arg1 arg2 voltage is less than the lower critical threshold."
+    },
+    {
+      "query_id": "TEST90-0215",
+      "vendor": "Dell",
+      "message": "CPU arg1 arg2 voltage is greater than the upper warning threshold."
+    },
+    {
+      "query_id": "TEST90-0216",
+      "vendor": "Dell",
+      "message": "CPU arg1 arg2 voltage is greater than the upper critical threshold."
+    },
+    {
+      "query_id": "TEST90-0217",
+      "vendor": "Dell",
+      "message": "The fan of the Witness Server has detected an airflow direction mismatch with the chassis airflow."
+    },
+    {
+      "query_id": "TEST90-0218",
+      "vendor": "HPE",
+      "message": "Fan X Failure Detected (Fan Zone I/O)."
+    },
+    {
+      "query_id": "TEST90-0219",
+      "vendor": "HPE",
+      "message": "Fan X Failure Detected (Fan Zone CPU)."
+    },
+    {
+      "query_id": "TEST90-0220",
+      "vendor": "HPE",
+      "message": "Low System Battery warning."
+    },
+    {
+      "query_id": "TEST90-0221",
+      "vendor": "HPE",
+      "message": "Power Supply Failure – Power Supply X is failed."
+    },
+    {
+      "query_id": "TEST90-0222",
+      "vendor": "HPE",
+      "message": "Unsupported Power Supply Configuration – Unsupported Power Supply Mismatch."
+    },
+    {
+      "query_id": "TEST90-0223",
+      "vendor": "HPE",
+      "message": "Slot # Drive Array – Please install battery. Caching will be enabled once the battery is installed and charged."
+    },
+    {
+      "query_id": "TEST90-0224",
+      "vendor": "HPE",
+      "message": "Slot # Drive Array – Stripe size too large for RAID 5/6 logical drive(s). This configuration is not recommended due to transfer buffer usage. Consider migrating to lower stripe size via Array Configuration Utility."
+    },
+    {
+      "query_id": "TEST90-0225",
+      "vendor": "HPE",
+      "message": "Slot # Drive Array – Drive Parameter Tracking Predicts Imminent Failure. The following drives should be replaced when conditions permit: Port # Box # Bay(s) #"
+    },
+    {
+      "query_id": "TEST90-0226",
+      "vendor": "HPE",
+      "message": "Slot # Drive Array – Storage Enclosure Firmware Upgrade Problem Detected. Port # Box # (Followed by one of the following:) • Enclosure firmware upgrade needed - run Flash Components. • Unable to read firmware version of one or more components."
+    },
+    {
+      "query_id": "TEST90-0227",
+      "vendor": "HPE",
+      "message": "Slot # Drive Array – Disk Drive(s) Responding to Incorrect SCSI ID. Back up data, Replace faulty drive, Reconfigure array, and Restore."
+    },
+    {
+      "query_id": "TEST90-0228",
+      "vendor": "HPE",
+      "message": "HP Trusted Platform Module Error."
+    },
+    {
+      "query_id": "TEST90-0229",
+      "vendor": "HPE",
+      "message": "Slot # Drive Array – Unsupported Cache Module Battery Attached. Please install battery pack(s) with the correct part number."
+    },
+    {
+      "query_id": "TEST90-0230",
+      "vendor": "HPE",
+      "message": "Slot X Drive Array – Array Controller Maximum Operating Temperature Exceeded During Previous Power Up."
+    },
+    {
+      "query_id": "TEST90-0231",
+      "vendor": "HPE",
+      "message": "Slot XX Not Configured. SAS cable configuration is invalid."
+    },
+    {
+      "query_id": "TEST90-0232",
+      "vendor": "HPE",
+      "message": "Slot X Encryption Failure-Master Key is incorrect or not retrieved from Remote Key Manager. Encrypted logical drives may be offline. System may not boot."
+    },
+    {
+      "query_id": "TEST90-0233",
+      "vendor": "HPE",
+      "message": "Slot X Encryption Failure – FW version for this controller does not support HP Secure Encryption. Encrypted logical drives are offline. System may not boot."
+    },
+    {
+      "query_id": "TEST90-0234",
+      "vendor": "HPE",
+      "message": "Slot X Drive Array – Please install cache module battery pack. Caching will be enabled once Battery Pack is installed and charged."
+    },
+    {
+      "query_id": "TEST90-0235",
+      "vendor": "HPE",
+      "message": "Slot # Drive Array – Please replace cache module battery pack. Caching will be enabled once the Battery Pack has been replaced and charged."
+    },
+    {
+      "query_id": "TEST90-0236",
+      "vendor": "HPE",
+      "message": "DIMM Configuration Error – The DIMM configuration is incorrect and prevents the system from initializing memory. System video output may have additional information regarding failure. The system is halted."
+    },
+    {
+      "query_id": "TEST90-0237",
+      "vendor": "HPE",
+      "message": "Unsupported DIMM Configuration Detected – Mixed DIMM configurations are not supported on this system. (Major Code: X, Minor Code: Y)."
+    },
+    {
+      "query_id": "TEST90-0238",
+      "vendor": "HPE",
+      "message": "Unsupported DIMM Configuration Detected - Mixing 3DS LRDIMMs with non-3DS LRDIMMs is not supported. (Major Code: X, Minor Code: Y)."
+    },
+    {
+      "query_id": "TEST90-0239",
+      "vendor": "HPE",
+      "message": "Unsupported Processor Configuration Detected. All installed processors do not have the same model number."
+    },
+    {
+      "query_id": "TEST90-0240",
+      "vendor": "HPE",
+      "message": "UEFI Non-Volatile Variable Store Corruption Detected. If enabled, Secure Boot security settings may be lost."
+    },
+    {
+      "query_id": "TEST90-0241",
+      "vendor": "HPE",
+      "message": "Required Fan NOT Installed – Fan X Missing."
+    },
+    {
+      "query_id": "TEST90-0242",
+      "vendor": "HPE",
+      "message": "Insufficient Fan Solution. The system does not have the minimum required number of operating fans. Some instances of this message will be followed by \"System Halted\" when the system is halted during POST"
+    },
+    {
+      "query_id": "TEST90-0243",
+      "vendor": "HPE",
+      "message": "Chassis Firmware Error – Unable to communicate with the Chassis Firmware."
+    },
+    {
+      "query_id": "TEST90-0244",
+      "vendor": "HPE",
+      "message": "HP Dual microSD Device Error – microSD cards have conflicting metadata. Configuration required."
+    },
+    {
+      "query_id": "TEST90-0245",
+      "vendor": "HPE",
+      "message": "Memory Board Configuration Error – The system contains multiple types of memory boards. Mixing types is NOT supported. – System Halted"
+    },
+    {
+      "query_id": "TEST90-0246",
+      "vendor": "HPE",
+      "message": "Memory Board Configuration Error – One or more installed memory boards is of a type NOT supported by the installed processor. – System Halted"
+    },
+    {
+      "query_id": "TEST90-0247",
+      "vendor": "HPE",
+      "message": "NVDIMM Error – Restore Error - Processor X, DIMM Y. Persistent data restore failed and data is not available."
+    },
+    {
+      "query_id": "TEST90-0248",
+      "vendor": "HPE",
+      "message": "NVDIMM Population Error – Processor 1 must have at least one RDIMM installed when NVDIMMs are present in the system."
+    },
+    {
+      "query_id": "TEST90-0249",
+      "vendor": "HPE",
+      "message": "Memory Initialization Error – Processor X, DIMM Y failed initialization."
+    },
+    {
+      "query_id": "TEST90-0250",
+      "vendor": "HPE",
+      "message": "NVDIMM Error – Processor X, DIMM Y. NVDIMM Metadata is corrupted. NVDIMM is disabled."
+    },
+    {
+      "query_id": "TEST90-0251",
+      "vendor": "HPE",
+      "message": "Cache module: The cache is disabled because the batteries are low on the redundant controller."
+    },
+    {
+      "query_id": "TEST90-0252",
+      "vendor": "HPE",
+      "message": "Cache module: The cache is disabled because the restore operation from flash memory failed."
+    },
+    {
+      "query_id": "TEST90-0253",
+      "vendor": "HPE",
+      "message": "Logical drive state: This logical drive has a high physical drive count as well as a high stripe size value such that a controller lock up could occur. It is recommended that the stripe size be migrated to a lower value."
+    },
+    {
+      "query_id": "TEST90-0254",
+      "vendor": "HPE",
+      "message": "Physical Drive State: This drive is not supported for configuration by this version of controller firmware."
+    },
+    {
+      "query_id": "TEST90-0255",
+      "vendor": "HPE",
+      "message": "Physical Drive State: This drive is unrecognizable. It is not supported for configuration and should be disconnected from this controller."
+    },
+    {
+      "query_id": "TEST90-0256",
+      "vendor": "HPE",
+      "message": "Storage Enclosure: One or more fans have failed."
+    },
+    {
+      "query_id": "TEST90-0257",
+      "vendor": "HPE",
+      "message": "FC Fabric state FAILED"
+    },
+    {
+      "query_id": "TEST90-0258",
+      "vendor": "HPE",
+      "message": "Connectivity has been lost for the NIC in slot %1, port %2."
+    },
+    {
+      "query_id": "TEST90-0259",
+      "vendor": "HPE",
+      "message": "The fault tolerant power supply in the %6 %7 storage system connected to SCSI bus %5 of the controller in slot %4 has a degraded status. Restore power or replace any failed power supply."
+    },
+    {
+      "query_id": "TEST90-0260",
+      "vendor": "HPE",
+      "message": "The Drive Array Controller in slot %4 has become the active controller."
+    },
+    {
+      "query_id": "TEST90-0261",
+      "vendor": "HPE",
+      "message": "The fault tolerant power supply in the %6 %7 storage system connected to %5 of the controller in%4 has a new status of %2."
+    },
+    {
+      "query_id": "TEST90-0262",
+      "vendor": "HPE",
+      "message": "The fault tolerant power supply in the %6 %7 storage system connected to SCSI bus %5 of the controller in %4 has a new status of %2."
+    },
+    {
+      "query_id": "TEST90-0263",
+      "vendor": "HPE",
+      "message": "This trap indicates that an enclosure fan has failed but other fans in the redundant fan group are still operating. This may result in overheating of the enclosure."
+    },
+    {
+      "query_id": "TEST90-0264",
+      "vendor": "HPE",
+      "message": "%1 Storage system overheating (%2Slot %3, Temperature Sensor %4, Location %5, Temperature %6)"
+    },
+    {
+      "query_id": "TEST90-0265",
+      "vendor": "HPE",
+      "message": "The temperature of the PCIe disk %1 has crossed the upper critical threshold."
+    },
+    {
+      "query_id": "TEST90-0266",
+      "vendor": "HPE",
+      "message": "Liquid Cooling Module Degraded (%1, Location %2)"
+    },
+    {
+      "query_id": "TEST90-0267",
+      "vendor": "HPE",
+      "message": "Processor %1 encountered fault or an unrecoverable error while booting (before SCP boot) - Restart Initiated"
+    },
+    {
+      "query_id": "TEST90-0268",
+      "vendor": "HPE",
+      "message": "An uncorrectable processor error detected (Processor: %1, Error Type: %2, Error count: %3%4)"
+    },
+    {
+      "query_id": "TEST90-0269",
+      "vendor": "HPE",
+      "message": "PCI Express Uncorrectable Error Detected (Processor: %1, Segment: %2, AER Uncorrectable Error Status: %3, Overflow: %4)"
+    },
+    {
+      "query_id": "TEST90-0270",
+      "vendor": "HPE",
+      "message": "An uncorrectable PCI express error detected on Port type: %1 (Segment: 0x%2, Bus: %3, Device: %4, Function: %5%7) %6"
+    },
+    {
+      "query_id": "TEST90-0271",
+      "vendor": "HPE",
+      "message": "The device in PCIe Slot %1 is single root input/output virtualization (SRIOV) capable but is installed in a slot that does not support SRIOV."
+    },
+    {
+      "query_id": "TEST90-0272",
+      "vendor": "HPE",
+      "message": "The persistent data restore failed and data is not available. Data is not lost unless the issue persists."
+    },
+    {
+      "query_id": "TEST90-0273",
+      "vendor": "HPE",
+      "message": "NVDIMM backup power has been lost and a future backup is not possible. Data from the last successful backup is intact, but data modified after the last successful backup will be lost if power cannot be restored."
+    },
+    {
+      "query_id": "TEST90-0274",
+      "vendor": "HPE",
+      "message": "The NVDIMM could not be erased by the NVDIMM controller firmware and future backups are not possible."
+    },
+    {
+      "query_id": "TEST90-0275",
+      "vendor": "HPE",
+      "message": "NVDIMM Error: Processor %1, DIMM %2"
+    },
+    {
+      "query_id": "TEST90-0276",
+      "vendor": "HPE",
+      "message": "NVDIMM configuration error: The Advanced Memory Protection mode is not Advanced ECC. Only Advanced ECC is supported with NVDIMMs. All NVDIMMs are disabled."
+    },
+    {
+      "query_id": "TEST90-0277",
+      "vendor": "HPE",
+      "message": "If an OS is running, blue-screen errors or system reboots might occur."
+    },
+    {
+      "query_id": "TEST90-0278",
+      "vendor": "HPE",
+      "message": "The Application Watchdog NMI has been signaled (per the system configuration policy)."
+    },
+    {
+      "query_id": "TEST90-0279",
+      "vendor": "HPE",
+      "message": "Intel Optane PMem for HPE Configuration Error - Processor %1 DIMM %2 (SN: %3) failed to apply the goal configuration due to Firmware Error Code 0x%4."
+    },
+    {
+      "query_id": "TEST90-0280",
+      "vendor": "HPE",
+      "message": "Intel Optane PMem for HPE Configuration Error - Processor %1 DIMM %2 (SN: %3) failed to apply the goal configuration due to missing DIMM(s) or DIMM Configuration Errors."
+    },
+    {
+      "query_id": "TEST90-0281",
+      "vendor": "HPE",
+      "message": "Intel Optane PMem for HPE Configuration Error - Processor %1 DIMM %2 (SN: %3) failed to apply the goal configuration due to insufficient Memory Resources."
+    },
+    {
+      "query_id": "TEST90-0282",
+      "vendor": "HPE",
+      "message": "Intel Optane PMem for HPE Configuration Error - Processor %1 DIMM %2 (SN: %3) failed to apply the goal configuration due to Memory Interleaving Errors."
+    },
+    {
+      "query_id": "TEST90-0283",
+      "vendor": "HPE",
+      "message": "Replacement drives detected OR previously failed drives now appear to be operational."
+    },
+    {
+      "query_id": "TEST90-0284",
+      "vendor": "HPE",
+      "message": "Drive array recovery needed."
+    },
+    {
+      "query_id": "TEST90-0285",
+      "vendor": "HPE",
+      "message": "A POST message displays: Slot X Drive Array. Cache Module critical error."
+    },
+    {
+      "query_id": "TEST90-0286",
+      "vendor": "HPE",
+      "message": "A POST message displays: Slot X Drive Array—Cache Module critical error."
+    },
+    {
+      "query_id": "TEST90-0287",
+      "vendor": "HPE",
+      "message": "Slot %1 Storage: Volume %2 status changed to missing."
+    },
+    {
+      "query_id": "TEST90-0288",
+      "vendor": "HPE",
+      "message": "Slot %1 Storage: Volume %2 status changed to disabled. %3."
+    },
+    {
+      "query_id": "TEST90-0289",
+      "vendor": "HPE",
+      "message": "Firmware image recovery not successful."
+    },
+    {
+      "query_id": "TEST90-0290",
+      "vendor": "HPE",
+      "message": "Unsupported PCIe Card Configuration. The PCIe device installed in Slot %1 is not supported in the current location."
+    },
+    {
+      "query_id": "TEST90-0291",
+      "vendor": "HPE",
+      "message": "Server Configuration Lock has detected a discrepancy with the DIMM (%1 %2 Dimm %3) Digital Fingerprint."
+    },
+    {
+      "query_id": "TEST90-0292",
+      "vendor": "HPE",
+      "message": "Resetting the configuration for PCI controller: %1 failed."
+    },
+    {
+      "query_id": "TEST90-0293",
+      "vendor": "HPE",
+      "message": "New Intel Optane PMem for HPE Module is detected on Processor %1, DIMM %2 (SN: %3)."
+    },
+    {
+      "query_id": "TEST90-0294",
+      "vendor": "HPE",
+      "message": "Backup power is not available for DIMM Slot belonging to Processor %1, DIMM %2 (SN:%3-%4-%5-%6). Future backups are not possible. Data from the last successful backup is intact, but data modified after the last successful backup will be lost if power cannot be restored."
+    },
+    {
+      "query_id": "TEST90-0295",
+      "vendor": "HPE",
+      "message": "Power supply output exceeded the design threshold."
+    },
+    {
+      "query_id": "TEST90-0296",
+      "vendor": "HPE",
+      "message": "The battery located in %1 has changed to %2"
+    },
+    {
+      "query_id": "TEST90-0297",
+      "vendor": "HPE",
+      "message": "ASR detected by system ROM"
+    },
+    {
+      "query_id": "TEST90-0298",
+      "vendor": "HPE",
+      "message": "Fibre Channel Host Controller has a new Status %1"
+    },
+    {
+      "query_id": "TEST90-0299",
+      "vendor": "HPE",
+      "message": "The drive array controller is not responding."
+    },
+    {
+      "query_id": "TEST90-0300",
+      "vendor": "HPE",
+      "message": "%1 Storage: Drive at %3 status changed to %2 (AMS)."
+    },
+    {
+      "query_id": "TEST90-0301",
+      "vendor": "HPE",
+      "message": "iLO requests the system to be powered on, but the Frame Link Module (FLM) or the Onboard Administrator (OA) are denying the request."
+    },
+    {
+      "query_id": "TEST90-0302",
+      "vendor": "HPE",
+      "message": "HPM authentication failed. As %1 component integrity policy set to %2."
+    },
+    {
+      "query_id": "TEST90-0303",
+      "vendor": "HPE",
+      "message": "UPI Initialization Error: A fatal UPI initialization error has been detected. %1 (Major Code: %2, Minor Code: %3)."
+    },
+    {
+      "query_id": "TEST90-0304",
+      "vendor": "HPE",
+      "message": "System initialization error"
+    },
+    {
+      "query_id": "TEST90-0305",
+      "vendor": "HPE",
+      "message": "DIMM Initialization Error: Processor %1 %2. The identified memory channel could not be properly trained and has been mapped out. The indicated DIMMs will not be available. (Major Code:%3, Minor Code:%4)."
+    },
+    {
+      "query_id": "TEST90-0306",
+      "vendor": "HPE",
+      "message": "Unsupported DIMM Configuration Detected - Processor %1 %2. DIMM population rule violation. The memory channel has been mapped out. The indicated DIMMs will not be available. (Major Code:%3, Minor Code:%4)."
+    },
+    {
+      "query_id": "TEST90-0307",
+      "vendor": "HPE",
+      "message": "A POST message displays: DIMM configuration error: Processor X, DIMM Y&mdashQuad Rank DIMMs must be installed in the first socket of any memory channel in which they are populated."
+    },
+    {
+      "query_id": "TEST90-0308",
+      "vendor": "HPE",
+      "message": "A POST message displays: System ROM authentication error – The BIOS image could not be authenticated."
+    },
+    {
+      "query_id": "TEST90-0309",
+      "vendor": "HPE",
+      "message": "Intel Optane PMem for HPE Configuration Error - Processor %1 DIMM %2 (SN: %3). The indicated PMem is not supported. The affected channel is mapped out. DIMM %4 and %5 are not available. (Major Code:%6, Minor Code:%7)."
+    },
+    {
+      "query_id": "TEST90-0310",
+      "vendor": "HPE",
+      "message": "Server Platform Services authentication failure - The Server Platform Services (SPS) firmware image failed authentication and may be compromised."
+    },
+    {
+      "query_id": "TEST90-0311",
+      "vendor": "HPE",
+      "message": "Server Platform Services (SPS) Firmware in Recovery Mode. System Halted."
+    },
+    {
+      "query_id": "TEST90-0312",
+      "vendor": "HPE",
+      "message": "Intel Trusted Execution Error: Intel TXT BIOS ACM has reported an error (code:0x%1)"
+    },
+    {
+      "query_id": "TEST90-0313",
+      "vendor": "HPE",
+      "message": "Unsupported DIMM Configuration Detected - Processor %1 DIMM %2 has population violation due to an event that has led to an unsupported configuration. (Major Code:%3, Minor Code:%4)."
+    },
+    {
+      "query_id": "TEST90-0314",
+      "vendor": "HPE",
+      "message": "CPU firmware mismatch - Mixed %1 firmware versions between processor %2 (%3) and processor %4 (%5)."
+    },
+    {
+      "query_id": "TEST90-0315",
+      "vendor": "HPE",
+      "message": "CXL configuration error encountered as a CXL device is installed in the incorrect slot (Processor %1 Slot %2)."
+    },
+    {
+      "query_id": "TEST90-0316",
+      "vendor": "HPE",
+      "message": "Component Integrity Failure. Unable to obtain Component Integrity from iLO. System is in a freeze state."
+    }
+  ]
+}
