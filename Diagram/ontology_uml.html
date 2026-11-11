@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Server troubleshooting · UML class diagram</title>
+<style>
+:root{color-scheme:light;--paper:#fff;--ink:#21334a;--muted:#65748a;--line:#4d6077;--blue:#245bd3;--wash:#edf3ff;--border:#dbe2ed;--bg:#f5f7fb;--purple:#7359a8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,select{font:inherit;color:inherit}button,select,a{touch-action:manipulation}button{cursor:pointer;border:1px solid var(--border);border-radius:7px;background:var(--paper);padding:8px 12px}button:hover{background:var(--wash)}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #8aa9ef;outline-offset:3px}button.primary{background:var(--ink);border-color:var(--ink);color:#fff}header{padding:25px 30px 18px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;background:var(--paper);border-bottom:1px solid var(--border)}.eyebrow{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--blue);text-transform:uppercase}h1{margin:5px 0;font-size:25px;letter-spacing:-.7px;font-weight:650}.subtitle{margin:0;color:var(--muted)}.counts{display:flex;gap:22px;white-space:nowrap}.counts strong{display:block;font-size:24px;line-height:1.2;font-weight:600}.counts span{font-size:12px;color:var(--muted)}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:13px 30px;background:var(--paper);border-bottom:1px solid var(--border)}.viewcontrol{display:flex;gap:10px;align-items:center}.viewcontrol label{font-size:12px;font-weight:650}.viewcontrol select{background:var(--bg);border:1px solid var(--border);padding:8px 30px 8px 12px;border-radius:7px;min-width:195px}.tools{margin-left:auto;display:flex;gap:7px;align-items:center;flex-wrap:wrap}#zoomLevel{font-variant-numeric:tabular-nums;color:var(--muted);min-width:44px;text-align:center;font-size:12px}.workspace{margin:18px 22px 0;background:var(--paper);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative}.canvashead{padding:11px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;gap:15px;align-items:center;font-size:12px;color:var(--muted)}.canvashead strong{color:var(--ink);font-weight:600}#canvas{display:block;width:100%;height:calc(100vh - 288px);min-height:440px;touch-action:none;cursor:grab;background:#fff}#canvas.dragging{cursor:grabbing}#scene .node{cursor:pointer}#scene .node .box{fill:#fff;stroke:var(--line);stroke-width:1.6}#scene .node:hover .box,#scene .node:focus .box,#scene .node.selected .box{stroke:var(--blue);stroke-width:2.7}#scene .node:focus{outline:none}#scene .node .headerfill{fill:#f0f4fa}#scene .node[data-kind="Supporting"] .headerfill{fill:#f2eef9}#scene .node[data-kind="Subclass"] .headerfill{fill:#edf6f3}#scene .external .box{fill:#f0f5ff;stroke:#647b9c;stroke-width:1.4}#scene .external[data-layer="M1"] .box{fill:#fff5e6}#scene .external{cursor:pointer}#scene .external:focus{outline:none}#scene .external:hover .box,#scene .external:focus .box{stroke:var(--blue);stroke-width:2.5}#scene .external text{font-size:17px;fill:var(--ink)}#scene .external .external-role{font-size:12px;fill:var(--muted);letter-spacing:1px}#scene .class-name{font-size:19px;font-weight:650;fill:var(--ink)}#scene .class-purpose{font-size:14px;fill:var(--muted)}#scene .role{font-size:12px;fill:var(--muted);letter-spacing:1.4px}#scene .node .details{font-size:12px;fill:var(--blue);text-decoration:underline}#scene .edge{fill:none;stroke:var(--line);stroke-width:1.7;stroke-linejoin:round}#scene .edge-group.active .edge{stroke:var(--blue);stroke-width:2.7}#scene .hitline{fill:none;stroke:transparent;stroke-width:17;cursor:pointer}#scene .label{cursor:pointer}#scene .label rect{fill:#fff;stroke:none}#scene .label text{font-size:15px;fill:var(--ink);font-weight:550}#scene .label .constraint{font-size:12px;fill:var(--muted);font-weight:400}#scene .label:hover text,#scene .label:focus text{fill:var(--blue)}#scene .label:focus{outline:none}#scene .mult{font-size:13px;fill:var(--muted);paint-order:stroke;stroke:white;stroke-width:6px;stroke-linejoin:round}#scene .section-label{font-size:13px;fill:#8792a3;letter-spacing:2px}#scene .generalization-label{font-size:14px;fill:var(--muted)}.legendbar{display:flex;gap:20px;align-items:center;flex-wrap:wrap;padding:11px 18px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}.legenditem{display:flex;gap:7px;align-items:center}.legenditem svg{width:48px;height:18px;overflow:visible}.caption{padding:12px 30px 18px;font-size:12px;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}.caption a{color:var(--blue)}dialog{border:1px solid var(--border);border-radius:12px;padding:0;width:min(680px,calc(100vw - 32px));max-height:85vh;color:var(--ink);box-shadow:0 20px 80px #17283d40}dialog::backdrop{background:#14253b70}.dialoghead{display:flex;justify-content:space-between;gap:15px;align-items:flex-start;padding:24px 25px 15px;border-bottom:1px solid var(--border)}dialog h2{font-size:21px;line-height:1.3;margin:5px 0}.dialogbody{padding:20px 25px 25px}.dialogbody h3{font-size:13px;letter-spacing:.03em;margin:20px 0 6px}.dialogbody h3:first-child{margin-top:0}.dialogbody p{margin:6px 0 13px}.dialogbody code{background:var(--bg);padding:3px 5px;border-radius:3px;font-size:12px;overflow-wrap:anywhere}.triple{display:block;line-height:1.8;padding:12px!important}.dialogbody ul{padding-left:20px}.dialogbody li{margin:8px 0}.tag{display:inline-block;padding:3px 7px;margin:0 5px 5px 0;background:var(--wash);color:#345588;border-radius:4px;font-size:12px}.notice{background:var(--bg);padding:12px 14px;border-left:3px solid #99accb}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}@media(max-width:800px){header{padding:18px;align-items:flex-start;flex-direction:column;gap:13px}h1{font-size:22px}.counts{gap:22px}.counts strong{font-size:20px}.counts span{font-size:11px}.toolbar{padding:12px 18px}.tools{margin-left:0}.workspace{margin:12px 10px 0}#canvas{height:60vh;min-height:400px}.canvashead{align-items:flex-start}.canvashead .hint{display:none}.caption{padding:12px 18px}.viewcontrol{width:100%}.viewcontrol select{flex:1}.legendbar{gap:10px 15px}.tools button{padding:8px 10px}}@media print{header,.toolbar,.canvashead,.legendbar,.caption{display:none}.workspace{margin:0;border:0}#canvas{height:95vh;width:100%}}
+</style>
+</head>
+<body>
+<header><div><div class="eyebrow">Server hardware &amp; firmware · Ontology design</div><h1>Troubleshooting knowledge model</h1><p class="subtitle">Interactive UML class diagram · Dell, Cisco and HPE reference knowledge</p></div><div class="counts" aria-label="Model counts"><div><strong>6 + 1</strong><span>Core + supporting</span></div><div><strong>2</strong><span>Subclasses</span></div><div><strong>12</strong><span>Object properties</span></div></div></header>
+<nav class="toolbar" aria-label="Diagram controls"><div class="viewcontrol"><label for="view">Explore</label><select id="view"><option value="all">Complete</option></select></div><div class="tools"><button id="zoomOut" aria-label="Zoom out">−</button><output id="zoomLevel" aria-label="Zoom level">100%</output><button id="zoomIn" aria-label="Zoom in">+</button><button id="fit">Fit</button><button id="notation">Notation</button><button id="export">Download SVG</button></div></nav>
+<main><section class="workspace" aria-label="Interactive UML diagram"><div class="canvashead"><strong id="viewTitle">Complete model</strong><span class="hint">Select a class to explore · Click a relationship for details · Drag to pan</span><span id="viewCount" aria-live="polite">9 local classes · 12 properties · 2 local + 8 external generalizations</span></div><svg id="canvas" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="svgtitle svgdesc"><title id="svgtitle">Server troubleshooting ontology UML class diagram</title><desc id="svgdesc">Six core classes, one supporting class, two category subclasses, twelve object properties, two local subclass connections and eight superclass alignments to NORIA M1 and DUL M2. Use Explore to focus a class or keyboard controls to inspect relationships.</desc><defs><marker id="navArrow" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="12" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path d="M 1 1 L 11 6 L 1 11" fill="none" stroke="#4d6077" stroke-width="1.5"/></marker><marker id="composition" viewBox="0 0 22 16" refX="0" refY="8" markerWidth="22" markerHeight="16" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 8 L 11 1 L 22 8 L 11 15 Z" fill="#21334a" stroke="#21334a"/></marker><marker id="generalization" viewBox="0 0 20 20" refX="19" refY="10" markerWidth="20" markerHeight="20" markerUnits="userSpaceOnUse" orient="auto"><path d="M 1 1 L 19 10 L 1 19 Z" fill="white" stroke="#4d6077" stroke-width="1.6"/></marker></defs><g id="scene"></g></svg><div class="legendbar"><span class="legenditem"><svg aria-hidden="true"><path d="M1 9H45" stroke="#4d6077"/><path d="M37 4L45 9L37 14" fill="none" stroke="#4d6077"/></svg>Association / navigation</span><span class="legenditem"><svg aria-hidden="true"><path d="M1 9L9 3L17 9L9 15Z" fill="#21334a"/><path d="M17 9H46" stroke="#4d6077"/></svg>Composition · diamond at whole</span><span class="legenditem"><svg aria-hidden="true"><path d="M1 9H32" stroke="#4d6077"/><path d="M32 2L46 9L32 16Z" stroke="#4d6077" fill="white"/></svg>Subclass → parent</span><span class="legenditem">{…} Model constraints</span><span class="legenditem">1 = exactly one · 1..* = one or more · 0..* = optional many</span></div></section><footer class="caption"><span>Design: 9 local classes · 4 distinct direct external parents · 12 object properties</span><a href="https://www.omg.org/spec/UML/2.5.1/" target="_blank" rel="noreferrer">Notation: OMG UML 2.5.1 ↗</a><span>Supporting links require reviewed enrichment; no populated KG is implied.</span></footer></main>
+<dialog id="detail"><div class="dialoghead"><div><div id="detailKind" class="eyebrow"></div><h2 id="detailTitle"></h2></div><button id="closeDialog" aria-label="Close details">Close</button></div><div id="detailBody" class="dialogbody"></div></dialog>
+<script>
+'use strict';
+// Nine local classes and twelve object properties. External parent occurrences below
+// use original class IRIs; repeated occurrences denote the same classifier.
+const classes = [
+ {id:'EventDefinition',kind:'Core',x:200,y:440,w:320,h:88,subtitle:'Documented event or problem',why:'The entry point for recognising a documented problem and retrieving its troubleshooting knowledge. It is a reference definition, not an observed incident.',source:'record_id, event_code, event_namespace, event_name, severity, explanation, cause_category',example:'A Dell event definition documenting a failure to restore iDRAC firmware.'},
+ {id:'MessageTemplate',kind:'Core',x:200,y:160,w:320,h:88,subtitle:'Source-specific message pattern',why:'Preserves the messages and variants that identify an event, including placeholders. Identical strings in different definitions can be separate owned occurrences.',source:'Each messages[] entry; documented message_arguments retained as metadata.',example:'A message containing arg1 and arg2, together with their documented meanings.'},
+ {id:'PossibleCause',kind:'Core',x:1700,y:440,w:320,h:88,subtitle:'Explicitly documented explanation',why:'Represents a possible explanation explicitly stated by the source. An explanation is not automatically a confirmed root cause.',source:'Explicit statements within troubleshooting[].cause_text; preserve the original source group.',example:'Mixed 1.25 V and 1.5 V DIMMs, when explicitly stated as a cause by the guide.'},
+ {id:'RecoveryProcedure',kind:'Core',x:950,y:440,w:320,h:88,subtitle:'Complete contextual recommendation',why:'Retains a complete recommendation, including applicability, alternatives, conditions, cautions and escalation instructions. A recommendation is not evidence of a successful repair.',source:'Each troubleshooting[] group with action_text; retain its label and full text.',example:'A guide’s complete procedure for diagnosing and replacing a failed power supply.'},
+ {id:'ComponentType',kind:'Core',x:950,y:900,w:320,h:88,subtitle:'Kind of hardware component',why:'Describes a component kind, rather than a particular installed device. It can identify the problem component or the component a procedure targets.',source:'component_types[]; procedure targets require separate review of the action text.',example:'Memory module; network adapter; cable/connector; management controller.'},
+ {id:'EventCategory',kind:'Core',x:200,y:900,w:320,h:88,subtitle:'Shared topic for indexing',why:'Organises events across vendors and supports filtering. Category labels such as Memory are individuals, not extra classes.',source:'categories[] as category individuals; broader-category links need a curated hierarchy.',example:'The Memory category used by definitions from more than one vendor.'},
+ {id:'ProcedureItem',kind:'Supporting',x:950,y:160,w:320,h:88,subtitle:'Printed item within a procedure',why:'Preserves an item occurrence and its source order. A bullet may be an instruction, an alternative or a component list; this class does not make the procedure executable.',source:'troubleshooting[].steps[]: order, source_label, level and text.',example:'The second printed instruction in one particular recovery procedure.'},
+ {id:'HardwareCategory',kind:'Subclass',x:80,y:1200,w:320,h:88,subtitle:'A category concerned with hardware',why:'Specialises EventCategory for hardware-related category individuals. It can overlap FirmwareCategory and introduces no unique data properties in this design.',source:'Reviewed classification of existing category individuals.',example:'A reviewed Memory category individual classified as HardwareCategory.'},
+ {id:'FirmwareCategory',kind:'Subclass',x:500,y:1200,w:320,h:88,subtitle:'A category concerned with firmware',why:'Specialises EventCategory for firmware-related category individuals. The two category subclasses are neither mutually disjoint nor exhaustive.',source:'Reviewed classification of existing category individuals.',example:'A reviewed Firmware and BIOS category individual classified as FirmwareCategory.'}
+];
+const relations = [
+ {id:'hasMessageTemplate',s:'EventDefinition',t:'MessageTemplate',kind:'Composition',constraint:'asymmetric',a:'1',b:'1..*',points:[[360,440],[360,248]],label:[390,350],ma:[379,422],mb:[379,272],meaning:'A definition owns its source-specific message-template occurrences.',why:'The template occurrence is part of the definition’s representation, has exactly one owner and is not shared as a part between definitions. The same text may occur in another independently owned node.',example:'Definition A → hasMessageTemplate → Template A-1',status:'Source-based',caution:'The diamond is at EventDefinition. Deleting an owner would delete its owned representation under the application lifecycle policy; OWL itself does not perform deletion.'},
+ {id:'recommendsProcedure',s:'EventDefinition',t:'RecoveryProcedure',kind:'Association',a:'0..*',b:'1..*',points:[[520,450],[950,450]],label:[735,427],ma:[560,435],mb:[918,435],meaning:'A documented event recommends a complete troubleshooting procedure.',why:'This is a reference to a recommendation, without imposing exclusive ownership or a whole–part lifecycle on reusable procedure knowledge.',example:'Firmware-restore event → recommendsProcedure → Firmware recovery procedure',status:'Source-based'},
+ {id:'considersCause',s:'RecoveryProcedure',t:'PossibleCause',kind:'Association',a:'0..*',b:'0..*',points:[[1270,468],[1700,468]],label:[1485,444],ma:[1300,490],mb:[1669,490],meaning:'A procedure or source solution group considers an explicitly documented possible cause.',why:'Keeps the documented cause in its correct solution-group context. It does not imply that all procedures address every cause listed elsewhere.',example:'Mixed-DIMM troubleshooting procedure → considersCause → Mixed DIMM voltage',status:'Source-based',caution:'Assert only from explicit source cause text. Do not invent causes or cross-pair all causes with all recommendations.'},
+ {id:'investigatesCause',s:'ProcedureItem',t:'PossibleCause',kind:'Association',a:'0..*',b:'0..*',points:[[1170,160],[1170,85],[1640,85],[1640,410],[1740,410],[1740,440]],label:[1440,65],ma:[1190,120],mb:[1760,402],meaning:'Identifies a possible cause that this specific instruction is intended to investigate or gather evidence about.',why:'This adds item-specific diagnostic purpose. Procedure membership and considersCause do not tell us which item investigates which cause. It is a many-to-many association, without ownership or a confirmed outcome.',example:'Cisco F2058 item: review DIMM SEL statistics → investigatesCause → Possible peer-DIMM failure (illustrative reviewed mapping)',status:'Reviewed enrichment',caution:'Requires review of the item and full source-group context. No automatic item-by-cause cross product is inferred. This does not assert that a check was run or confirmed a cause.'},
+ {id:'addressesCause',s:'ProcedureItem',t:'PossibleCause',kind:'Association',a:'0..*',b:'0..*',points:[[1270,218],[1665,218],[1665,395],[1790,395],[1790,440]],label:[1460,246],ma:[1298,240],mb:[1810,420],meaning:'Identifies a possible cause that this specific corrective instruction is intended to address.',why:'This records the purpose of an individual corrective item rather than only the whole procedure. It is a many-to-many association and does not imply successful repair. An instruction can both investigate and address a cause.',example:'Cisco F2058 item: replace peer DIMM if necessary → addressesCause → Possible peer-DIMM failure (illustrative reviewed mapping)',status:'Reviewed enrichment',caution:'Populate only from reviewed item-specific source evidence. Do not infer this from hasItem / considersCause or mark every item as a repair. Neither relation is a subproperty of considersCause, whose domain is RecoveryProcedure.'},
+ {id:'hasItem',s:'RecoveryProcedure',t:'ProcedureItem',kind:'Composition',constraint:'asymmetric',a:'1',b:'0..*',points:[[1110,440],[1110,248]],label:[1140,350],ma:[1129,422],mb:[1129,272],meaning:'A recovery procedure owns its printed item occurrences.',why:'An item’s position and context belong to this procedure. Another procedure can contain identical text as a different item occurrence.',example:'Recovery procedure A → hasItem → Printed item A-2',status:'Source-based',caution:'An item is not automatically an executable step. Always retain the complete recommendation and its conditions.'},
+ {id:'concernsComponentType',s:'EventDefinition',t:'ComponentType',kind:'Association',a:'0..*',b:'0..*',points:[[520,502],[650,502],[650,944],[950,944]],label:[800,919],ma:[551,525],mb:[919,970],meaning:'Identifies the component kind implicated in the documented problem.',why:'Describes involvement, not ownership. A component type can be referenced by many definitions.',example:'Network-link problem → concernsComponentType → Network adapter',status:'Source-based'},
+ {id:'hasCategory',s:'EventDefinition',t:'EventCategory',kind:'Association',a:'0..*',b:'0..*',points:[[280,528],[280,900]],label:[390,747],ma:[300,555],mb:[300,880],meaning:'Assigns shared topic categories to an event definition.',why:'A definition may have several categories, and a category can organise many definitions across vendors. Missing classification does not require inventing a value.',example:'DIMM voltage event → hasCategory → Memory',status:'Source-based'},
+ {id:'hasPossibleCause',s:'EventDefinition',t:'PossibleCause',kind:'Association',constraint:'derived',a:'0..*',b:'0..*',points:[[520,486],[810,486],[810,692],[1860,692],[1860,528]],label:[1370,668],ma:[740,477],mb:[1880,556],meaning:'Connects a definition directly to a possible cause through its recommended procedure.',why:'This is a derived association, obtained through recommendsProcedure followed by considersCause. It is not a separately maintained duplicate cause list.',example:'Event → recommendsProcedure → Procedure → considersCause → Cause\nTherefore: Event → hasPossibleCause → Cause',status:'Derived',caution:'Use an OWL property chain or SPARQL property path. A derived association is drawn with a solid association line, not a dashed dependency arrow.'},
+ {id:'similarTo',s:'EventDefinition',t:'EventDefinition',kind:'Association',constraint:'symmetric',a:'0..*',b:'0..*',points:[[200,470],[70,470],[70,333],[245,333],[245,440]],label:[170,306],ma:[156,492],mb:[266,422],meaning:'Connects event definitions assessed as describing similar problems.',why:'Supports cross-vendor discovery. Similarity is mutual under the chosen assessed relation; it is neither equivalence nor a guarantee of interchangeable procedures.',example:'Assessed Dell memory event → similarTo → Assessed HPE memory event',status:'Reviewed enrichment',caution:'A common category or directional BM25 score is insufficient to assert this symmetric relation. No transitivity is assumed.'},
+ {id:'targetsComponentType',s:'RecoveryProcedure',t:'ComponentType',kind:'Association',a:'0..*',b:'0..*',points:[[1190,528],[1190,900]],label:[1310,810],ma:[1210,555],mb:[1210,880],meaning:'Identifies the component a procedure investigates, updates or replaces.',why:'The component involved in the symptom and the intervention target can differ. A network-adapter problem may recommend replacing a cable.',example:'Cable-replacement procedure → targetsComponentType → Cable/connector',status:'Reviewed enrichment',caution:'Extract from explicit action text. Do not automatically copy the event’s implicated component labels.'},
+ {id:'hasBroaderCategory',s:'EventCategory',t:'EventCategory',kind:'Association',constraint:'transitive',a:'0..*',b:'0..*',points:[[520,932],[780,932],[780,1082],[460,1082],[460,988]],label:[645,1056],ma:[550,956],mb:[480,1014],meaning:'Connects a specific category individual to a broader category individual.',why:'Supports hierarchical retrieval. If A has broader category B and B has broader category C, A also has broader category C. This is not a subclass relationship.',example:'Proposed category hierarchy:\nMemory training problems → Memory problems → Hardware problems',status:'Reviewed enrichment',caution:'The current source categories are flat. Curate this hierarchy; do not confuse category individuals with HardwareCategory/FirmwareCategory classes.'}
+];
+const generalizations = [
+ {id:'HardwareCategory-subclass',s:'HardwareCategory',t:'EventCategory',kind:'Generalization',points:[[240,1200],[240,1130],[360,1130]],example:'HardwareCategory → rdfs:subClassOf → EventCategory'},
+ {id:'FirmwareCategory-subclass',s:'FirmwareCategory',t:'EventCategory',kind:'Generalization',points:[[660,1200],[660,1130],[360,1130]],example:'FirmwareCategory → rdfs:subClassOf → EventCategory'}
+];
+const externalAlignments = [
+  {
+    "id": "alignment-1",
+    "s": "EventDefinition",
+    "iri": "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject",
+    "layer": "M2",
+    "label": "dul:InformationObject",
+    "x": 570,
+    "y": 230,
+    "w": 280,
+    "h": 64,
+    "points": [
+      [
+        500,
+        440
+      ],
+      [
+        500,
+        390
+      ],
+      [
+        540,
+        390
+      ],
+      [
+        540,
+        262
+      ],
+      [
+        570,
+        262
+      ]
+    ]
+  },
+  {
+    "id": "alignment-2",
+    "s": "MessageTemplate",
+    "iri": "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject",
+    "layer": "M2",
+    "label": "dul:InformationObject",
+    "x": 200,
+    "y": -20,
+    "w": 280,
+    "h": 64,
+    "points": [
+      [
+        360,
+        160
+      ],
+      [
+        360,
+        44
+      ]
+    ]
+  },
+  {
+    "id": "alignment-3",
+    "s": "PossibleCause",
+    "iri": "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject",
+    "layer": "M2",
+    "label": "dul:InformationObject",
+    "x": 1700,
+    "y": 230,
+    "w": 280,
+    "h": 64,
+    "points": [
+      [
+        1860,
+        440
+      ],
+      [
+        1860,
+        294
+      ]
+    ]
+  },
+  {
+    "id": "alignment-4",
+    "s": "ProcedureItem",
+    "iri": "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#InformationObject",
+    "layer": "M2",
+    "label": "dul:InformationObject",
+    "x": 950,
+    "y": -20,
+    "w": 280,
+    "h": 64,
+    "points": [
+      [
+        1110,
+        160
+      ],
+      [
+        1110,
+        44
+      ]
+    ]
+  },
+  {
+    "id": "alignment-5",
+    "s": "ComponentType",
+    "iri": "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept",
+    "layer": "M2",
+    "label": "dul:Concept",
+    "x": 1450,
+    "y": 912,
+    "w": 280,
+    "h": 64,
+    "points": [
+      [
+        1270,
+        944
+      ],
+      [
+        1450,
+        944
+      ]
+    ]
+  },
+  {
+    "id": "alignment-6",
+    "s": "EventCategory",
+    "iri": "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Concept",
+    "layer": "M2",
+    "label": "dul:Concept",
+    "x": -190,
+    "y": 912,
+    "w": 280,
+    "h": 64,
+    "points": [
+      [
+        200,
+        944
+      ],
+      [
+        90,
+        944
+      ]
+    ]
+  },
+  {
+    "id": "alignment-7",
+    "s": "RecoveryProcedure",
+    "iri": "https://w3id.org/noria/ontology/OperationPlan",
+    "layer": "M1",
+    "label": "noria:OperationPlan",
+    "x": 1330,
+    "y": 140,
+    "w": 280,
+    "h": 64,
+    "points": [
+      [
+        1230,
+        440
+      ],
+      [
+        1230,
+        300
+      ],
+      [
+        1300,
+        300
+      ],
+      [
+        1300,
+        172
+      ],
+      [
+        1330,
+        172
+      ]
+    ]
+  },
+  {
+    "id": "alignment-8",
+    "s": "RecoveryProcedure",
+    "iri": "http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#Plan",
+    "layer": "M2",
+    "label": "dul:Plan",
+    "x": 1330,
+    "y": 290,
+    "w": 280,
+    "h": 64,
+    "points": [
+      [
+        1250,
+        440
+      ],
+      [
+        1250,
+        386
+      ],
+      [
+        1470,
+        386
+      ],
+      [
+        1470,
+        354
+      ]
+    ]
+  }
+];
+const ns='http://www.w3.org/2000/svg', svg=document.getElementById('canvas'),scene=document.getElementById('scene'),view=document.getElementById('view'),dlg=document.getElementById('detail');
+const byId=new Map(classes.map(c=>[c.id,c])); let selection='all',camera={x:0,y:0,w:2200,h:1400},drag=null;
+const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function el(tag,attrs={},text){const n=document.createElementNS(ns,tag);for(const[k,v]of Object.entries(attrs))n.setAttribute(k,v);if(text!==undefined)n.textContent=text;return n;}
+function path(points){return points.map((p,i)=>(i?'L':'M')+p.join(' ')).join(' ');}
+function activate(element,fn){element.addEventListener('click',fn);element.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();fn(e);}});}
+for(const c of classes){const o=document.createElement('option');o.value=c.id;o.textContent=c.id;view.append(o);}
+function showDialog(kind,title,body){$('detailKind').textContent=kind;$('detailTitle').textContent=title;$('detailBody').innerHTML=body;if(!dlg.open)dlg.showModal();}
+function classDetails(c){const related=[...relations,...generalizations].filter(r=>r.s===c.id||r.t===c.id);const parents=externalAlignments.filter(a=>a.s===c.id);showDialog(c.kind+' class',c.id,`<h3>What it represents</h3><p>${esc(c.why)}</p><h3>External superclass alignments</h3>${parents.length?`<ul>${parents.map(a=>`<li><code>${esc(c.id)} → subClassOf → ${esc(a.label)}</code> · ${a.layer}</li>`).join('')}</ul>`:'<p>Inherits its upper alignment through EventCategory.</p>'}<h3>Dataset mapping</h3><p>${esc(c.source)}</p><h3>Example</h3><p>${esc(c.example)}</p><h3>Connections</h3><ul>${related.map(r=>`<li><code>${esc(r.s)} → ${esc(r.kind==='Generalization'?'subClassOf':r.id)} → ${esc(r.t)}</code></li>`).join('')}</ul>`);}
+function relationDetails(r){if(r.kind==='Generalization'){showDialog('Subclass connection',r.s+' → '+r.t,`<code class="triple">${esc(r.example)}</code><p>The hollow triangle points to the parent EventCategory. The subclass inherits its parent’s properties.</p><p>The two category subclasses form an <strong>overlapping, incomplete</strong> set: an individual may belong to both, and other EventCategory individuals need not belong to either.</p><p>This is one of two generalizations, not one of the twelve object properties.</p>`);return;}
+showDialog(r.status+' · '+r.kind,r.id,`<code class="triple">${esc(r.s)} → ${esc(r.id)} → ${esc(r.t)}</code><div><span class="tag">${esc(r.kind)}</span>${r.constraint?`<span class="tag">{${esc(r.constraint)}}</span>`:''}</div><h3>Meaning</h3><p>${esc(r.meaning)}</p><h3>Why this relationship type?</h3><p>${esc(r.why)}</p><h3>Multiplicity</h3><p>For one <strong>${esc(r.s)}</strong>: ${r.b==='1..*'?'one or more':'zero or more'} <strong>${esc(r.t)}</strong> targets.<br>For one <strong>${esc(r.t)}</strong>: ${r.a==='1'?'exactly one':'zero or more'} <strong>${esc(r.s)}</strong> ${r.kind==='Composition'?'owner':'sources'}.</p><h3>Example</h3><p style="white-space:pre-line">${esc(r.example)}</p>${r.caution?`<div class="notice">${esc(r.caution)}</div>`:''}`);}
+
+function alignmentDetails(a){const purpose=a.layer==='M1'?'NORIA-O is a domain ontology for IT operations. OperationPlan represents operational procedures.':'DUL is a foundational upper ontology. InformationObject represents documented information; Concept represents category/component-kind concepts; Plan represents intended corrective activity.';showDialog(a.layer+' external superclass',a.s+' → '+a.label,`<code class="triple">${esc(a.s)} → rdfs:subClassOf → ${esc(a.label)}</code><p>${purpose}</p><h3>Original class IRI</h3><p><code>${esc(a.iri)}</code></p><p>This is class generalization, shown with a solid line and hollow triangle at the external parent. It is not an additional local object property.</p><div class="notice">Repeated external boxes denote the same class IRI. Selected upstream declarations, named hierarchy and relevant disjointness are embedded offline; this is not a full import of either ontology. PROV-O is excluded. HardwareCategory and FirmwareCategory inherit through EventCategory.</div>`);}
+
+function render(){scene.replaceChildren();const activeEdges=selection==='all'?relations:relations.filter(r=>r.s===selection||r.t===selection),activeGens=selection==='all'?generalizations:generalizations.filter(r=>r.s===selection||r.t===selection);const visible=new Set(selection==='all'?classes.map(c=>c.id):[selection]);for(const r of [...activeEdges,...activeGens]){visible.add(r.s);visible.add(r.t);}
+const activeAlignments=selection==='all'?externalAlignments:externalAlignments.filter(a=>a.s===selection||activeGens.some(g=>g.t===a.s));
+for(const a of activeAlignments){const g=el('g',{'data-alignment':a.id});g.append(el('path',{d:path(a.points),class:'edge','marker-end':'url(#generalization)'}));const hit=el('path',{d:path(a.points),class:'hitline',tabindex:0,role:'button','aria-label':a.s+' extends '+a.label});activate(hit,()=>alignmentDetails(a));g.append(hit);scene.append(g);}
+for(const r of activeEdges){const g=el('g',{'class':'edge-group','data-relation':r.id});const attrs={d:path(r.points),class:'edge'};if(r.kind==='Composition')attrs['marker-start']='url(#composition)';else if(r.constraint!=='symmetric')attrs['marker-end']='url(#navArrow)';g.append(el('path',attrs));const hit=el('path',{d:path(r.points),class:'hitline','aria-hidden':'true'});hit.addEventListener('click',()=>relationDetails(r));g.append(hit);for(const[p,v]of [[r.ma,r.a],[r.mb,r.b]])g.append(el('text',{x:p[0],y:p[1],class:'mult','text-anchor':'middle'},v));scene.append(g);}
+if(activeGens.length){for(const r of activeGens){const g=el('g',{'data-generalization':r.id});g.append(el('path',{d:path(r.points),class:'edge'}));const hit=el('path',{d:path(r.points),class:'hitline',tabindex:0,role:'button','aria-label':r.s+' is a subclass of EventCategory'});activate(hit,()=>relationDetails(r));g.append(hit);scene.append(g);}scene.append(el('path',{d:'M360 1130 L360 988',class:'edge','marker-end':'url(#generalization)'}));scene.append(el('text',{x:80,y:1102,class:'generalization-label'},'{overlapping, incomplete}'));}
+// Label layers are drawn after all paths so lines never obscure their text.
+for(const r of activeEdges){const[x,y]=r.label;const g=el('g',{class:'label',transform:`translate(${x} ${y})`,tabindex:0,role:'button','aria-label':r.id+'; '+r.kind+(r.constraint?', '+r.constraint:'')});const rect=el('rect',{x:-30,y:-20,width:60,height:r.constraint?46:30,rx:4});const name=el('text',{'text-anchor':'middle',y:0},r.id);g.append(rect,name);let width=0;scene.append(g);width=name.getComputedTextLength();if(r.constraint){const t=el('text',{'text-anchor':'middle',y:19,class:'constraint'},'{'+r.constraint+'}');g.append(t);width=Math.max(width,t.getComputedTextLength());}rect.setAttribute('x',-width/2-10);rect.setAttribute('width',width+20);activate(g,()=>relationDetails(r));g.addEventListener('pointerenter',()=>scene.querySelector(`[data-relation="${r.id}"]`).classList.add('active'));g.addEventListener('pointerleave',()=>scene.querySelector(`[data-relation="${r.id}"]`).classList.remove('active'));}
+for(const c of classes.filter(c=>visible.has(c.id))){const g=el('g',{class:'node'+(selection===c.id?' selected':''),'data-class':c.id,'data-kind':c.kind,transform:`translate(${c.x} ${c.y})`,tabindex:0,role:'button','aria-label':c.id+', '+c.kind+' class. Activate to focus its connections.'});g.append(el('text',{x:0,y:-15,class:'role'},c.kind.toUpperCase()));g.append(el('rect',{x:0,y:0,width:c.w,height:c.h,class:'box'}));g.append(el('rect',{x:1,y:1,width:c.w-2,height:c.h-2,class:'headerfill'}));g.append(el('title',{},c.subtitle));g.append(el('text',{x:c.w/2,y:51,'text-anchor':'middle',class:'class-name'},c.id));activate(g,()=>select(c.id));const d=el('text',{x:c.w,y:-15,'text-anchor':'end',class:'details',tabindex:0,role:'button','aria-label':'Details for '+c.id},'Details');activate(d,e=>{e.stopPropagation();classDetails(c);});g.append(d);scene.append(g);}
+for(const a of activeAlignments){const g=el('g',{class:'external','data-external':a.id,'data-iri':a.iri,'data-layer':a.layer,transform:`translate(${a.x} ${a.y})`,tabindex:0,role:'button','aria-label':a.label+' '+a.layer+' external parent for '+a.s});g.append(el('text',{x:0,y:-12,class:'external-role'},a.layer+' · '+(a.layer==='M1'?'NORIA-O / DOMAIN':'DUL / UPPER')));g.append(el('rect',{x:0,y:0,width:a.w,height:a.h,class:'box'}));g.append(el('text',{x:a.w/2,y:39,'text-anchor':'middle'},a.label));activate(g,()=>alignmentDetails(a));scene.append(g);}
+$('viewTitle').textContent=selection==='all'?'Complete model':selection+' · direct connections';$('viewCount').textContent=`${visible.size} local classes · ${activeEdges.length} properties · ${activeGens.length} local + ${activeAlignments.length} external generalizations`;}
+function select(id){selection=id;view.value=id;render();fit();}
+function cameraApply(){svg.setAttribute('viewBox',`${camera.x} ${camera.y} ${camera.w} ${camera.h}`);$('zoomLevel').textContent=Math.round(svg.clientWidth/camera.w*100)+'%';}
+function fit(){const b=scene.getBBox(),rect=svg.getBoundingClientRect(),ratio=rect.width/rect.height;let w=b.width+145,h=b.height+125;if(w/h<ratio)w=h*ratio;else h=w/ratio;camera={x:b.x+b.width/2-w/2,y:b.y+b.height/2-h/2,w,h};cameraApply();}
+function zoom(f,cx=svg.clientWidth/2,cy=svg.clientHeight/2){const nw=Math.min(10000,Math.max(350,camera.w*f)),factor=nw/camera.w;camera.x+=camera.w*(1-factor)*cx/svg.clientWidth;camera.y+=camera.h*(1-factor)*cy/svg.clientHeight;camera.w=nw;camera.h*=factor;cameraApply();}
+view.addEventListener('change',()=>select(view.value));$('fit').addEventListener('click',fit);$('zoomIn').addEventListener('click',()=>zoom(.8));$('zoomOut').addEventListener('click',()=>zoom(1.25));$('closeDialog').addEventListener('click',()=>dlg.close());dlg.addEventListener('click',e=>{if(e.target===dlg){const b=dlg.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dlg.close();}});
+svg.addEventListener('wheel',e=>{e.preventDefault();const r=svg.getBoundingClientRect();zoom(Math.exp(Math.max(-100,Math.min(100,e.deltaY))*.0025),e.clientX-r.left,e.clientY-r.top);},{passive:false});svg.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('.node,.external,.label,.hitline'))return;drag={id:e.pointerId,x:e.clientX,y:e.clientY,cx:camera.x,cy:camera.y};svg.setPointerCapture(e.pointerId);svg.classList.add('dragging');});svg.addEventListener('pointermove',e=>{if(!drag)return;camera.x=drag.cx-(e.clientX-drag.x)*camera.w/svg.clientWidth;camera.y=drag.cy-(e.clientY-drag.y)*camera.h/svg.clientHeight;cameraApply();});function endDrag(){drag=null;svg.classList.remove('dragging');}svg.addEventListener('pointerup',endDrag);svg.addEventListener('pointercancel',endDrag);new ResizeObserver(()=>cameraApply()).observe(svg);
+$('notation').addEventListener('click',()=>showDialog('Standard notation & model scope','Reading this UML diagram',`<p>The notation follows <a href="https://www.omg.org/spec/UML/2.5.1/" target="_blank" rel="noreferrer">OMG UML 2.5.1</a>. UML is an OMG standard; this diagram does not claim IEEE certification.</p><ul><li><strong>Class rectangle:</strong> a class name compartment. This view focuses on classes and relationships; the 21 data properties are documented in the ontology schema.</li><li><strong>Solid line + open arrowhead:</strong> association with navigation toward the target shown. The opposite end’s navigation is unspecified. The details explicitly state RDF source and target.</li><li><strong>Filled diamond:</strong> composition; diamond at the whole. No extra arrowhead is used. The owned occurrence has exactly one owner.</li><li><strong>Hollow triangle:</strong> generalization; points to a local or external parent class. M1 identifies NORIA-O domain alignment; M2 identifies DUL upper alignment. External boxes may repeat the same qualified class and IRI to keep lines readable.</li><li><strong>Symmetric self-association:</strong> no arrowheads here, plus an explicit {symmetric} constraint. The missing arrows alone do not mean symmetry.</li><li><strong>{asymmetric}, {symmetric}, {transitive}:</strong> explicit ontology constraints carried as model annotations. They are not special UML arrow types.</li><li><strong>{derived}:</strong> hasPossibleCause is obtained via recommendsProcedure / considersCause. This is not a dashed dependency.</li><li><strong>1 / 1..* / 0..*:</strong> exactly one / one or more / optional many. The number beside a class says how many of that class may relate to one object at the other end.</li></ul><div class="notice">HardwareCategory and FirmwareCategory form an overlapping, incomplete generalization set. No disjointness is asserted. Similarity, procedure targets, item-level cause links and category hierarchy need reviewed enrichment. These are design requirements, not measured population counts.</div>`));
+$('export').addEventListener('click',()=>{const clone=svg.cloneNode(true),style=el('style',{},document.querySelector('style').textContent);clone.insertBefore(style,clone.firstChild);const b=scene.getBBox();clone.setAttribute('viewBox',`${b.x-55} ${b.y-55} ${b.width+110} ${b.height+110}`);clone.setAttribute('width',Math.ceil(b.width+110));clone.setAttribute('height',Math.ceil(b.height+110));clone.removeAttribute('id');clone.setAttribute('id','canvas');const str=new XMLSerializer().serializeToString(clone),url=URL.createObjectURL(new Blob([str],{type:'image/svg+xml;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='troubleshooting-uml'+(selection==='all'?'':'-'+selection)+'.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+render();requestAnimationFrame(fit);
+</script>
+</body>
+</html>

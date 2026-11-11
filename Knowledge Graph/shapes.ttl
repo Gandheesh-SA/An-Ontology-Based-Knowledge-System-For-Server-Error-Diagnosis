@@ -1,0 +1,120 @@
+@prefix diag: <https://example.org/server-troubleshooting#> .
+@prefix shape: <https://example.org/server-troubleshooting/shapes/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Population constraints, separate from OWL schema semantics. Classes and
+# relationship directions refer exclusively to the agreed local ontology.
+shape:EventDefinitionShape a sh:NodeShape ;
+    sh:targetClass diag:EventDefinition ; sh:nodeKind sh:IRI ;
+    sh:property [ sh:path diag:recordId ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:vendor ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:eventCode ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:eventNamespace ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:eventName ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:severity ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:explanation ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:causeCategory ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:sourceDocumentId ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:sourcePage ; sh:minCount 1 ; sh:datatype xsd:positiveInteger ] ;
+    sh:property [ sh:path diag:hasMessageTemplate ; sh:minCount 1 ; sh:class diag:MessageTemplate ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path diag:recommendsProcedure ; sh:minCount 1 ; sh:class diag:RecoveryProcedure ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path diag:hasCategory ; sh:class diag:EventCategory ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path diag:concernsComponentType ; sh:class diag:ComponentType ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path diag:hasPossibleCause ; sh:class diag:PossibleCause ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path diag:similarTo ; sh:class diag:EventDefinition ; sh:nodeKind sh:IRI ] .
+
+shape:MessageTemplateShape a sh:NodeShape ;
+    sh:targetClass diag:MessageTemplate ; sh:nodeKind sh:IRI ;
+    sh:property [ sh:path diag:messageText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:messageArguments ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path [ sh:inversePath diag:hasMessageTemplate ] ; sh:minCount 1 ; sh:maxCount 1 ; sh:class diag:EventDefinition ] .
+
+shape:RecoveryProcedureShape a sh:NodeShape ;
+    sh:targetClass diag:RecoveryProcedure ; sh:nodeKind sh:IRI ;
+    sh:property [ sh:path diag:procedureText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:procedureLabel ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:considersCause ; sh:class diag:PossibleCause ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path diag:hasItem ; sh:class diag:ProcedureItem ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path diag:targetsComponentType ; sh:class diag:ComponentType ; sh:nodeKind sh:IRI ] .
+
+shape:PossibleCauseShape a sh:NodeShape ;
+    sh:targetClass diag:PossibleCause ; sh:nodeKind sh:IRI ;
+    sh:property [ sh:path diag:causeText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+shape:ComponentTypeShape a sh:NodeShape ;
+    sh:targetClass diag:ComponentType ; sh:nodeKind sh:IRI ;
+    sh:property [ sh:path diag:componentTypeName ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .
+
+shape:EventCategoryShape a sh:NodeShape ;
+    sh:targetClass diag:EventCategory ; sh:nodeKind sh:IRI ;
+    sh:property [ sh:path diag:categoryName ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:hasBroaderCategory ; sh:class diag:EventCategory ; sh:nodeKind sh:IRI ] .
+
+shape:ProcedureItemShape a sh:NodeShape ;
+    sh:targetClass diag:ProcedureItem ; sh:nodeKind sh:IRI ;
+    sh:property [ sh:path diag:itemText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:itemOrder ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:positiveInteger ] ;
+    sh:property [ sh:path diag:sourceLabel ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
+    sh:property [ sh:path diag:nestingLevel ; sh:maxCount 1 ; sh:datatype xsd:nonNegativeInteger ] ;
+    sh:property [ sh:path diag:investigatesCause ; sh:class diag:PossibleCause ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path diag:addressesCause ; sh:class diag:PossibleCause ; sh:nodeKind sh:IRI ] ;
+    sh:property [ sh:path [ sh:inversePath diag:hasItem ] ; sh:minCount 1 ; sh:maxCount 1 ; sh:class diag:RecoveryProcedure ] .
+
+# Global integrity tests avoid accepting structurally valid but mis-scoped
+# item-to-cause links or a cyclic/missing materialised category hierarchy.
+shape:GraphIntegrity a sh:NodeShape ;
+    sh:targetNode shape:GraphIntegrity ;
+    sh:sparql [
+        sh:message "recordId must be unique across explicit event definitions." ;
+        sh:select """
+          PREFIX diag: <https://example.org/server-troubleshooting#>
+          SELECT DISTINCT $this WHERE {
+            ?event diag:recordId ?id . ?other diag:recordId ?id . FILTER(?other != ?event)
+          }
+        """
+    ] ;
+    sh:sparql [
+        sh:message "Two printed items in one procedure must not have the same itemOrder." ;
+        sh:select """
+          PREFIX diag: <https://example.org/server-troubleshooting#>
+          SELECT DISTINCT $this WHERE {
+            ?procedure diag:hasItem ?item, ?other .
+            ?item diag:itemOrder ?order . ?other diag:itemOrder ?order . FILTER(?item != ?other)
+          }
+        """
+    ] ;
+    sh:sparql [
+        sh:message "An instruction may link only to a cause considered by its own procedure." ;
+        sh:select """
+          PREFIX diag: <https://example.org/server-troubleshooting#>
+          SELECT DISTINCT $this WHERE {
+            ?item ?property ?cause .
+            FILTER(?property IN (diag:investigatesCause, diag:addressesCause))
+            FILTER NOT EXISTS { ?procedure diag:hasItem ?item ; diag:considersCause ?cause . }
+          }
+        """
+    ] ;
+    sh:sparql [
+        sh:message "Category hierarchy must not contain cycles." ;
+        sh:select """
+          PREFIX diag: <https://example.org/server-troubleshooting#>
+          SELECT DISTINCT $this WHERE { ?category diag:hasBroaderCategory+ ?category . }
+        """
+    ] ;
+    sh:sparql [
+        sh:message "The symmetric similarTo reverse link must be materialised." ;
+        sh:select """
+          PREFIX diag: <https://example.org/server-troubleshooting#>
+          SELECT DISTINCT $this WHERE {
+            ?a diag:similarTo ?b . FILTER NOT EXISTS { ?b diag:similarTo ?a . }
+          }
+        """
+    ] ;
+    sh:sparql [
+        sh:message "similarTo must not have self-links under this project's population policy." ;
+        sh:select """
+          PREFIX diag: <https://example.org/server-troubleshooting#>
+          SELECT DISTINCT $this WHERE { ?a diag:similarTo ?a . }
+        """
+    ] .

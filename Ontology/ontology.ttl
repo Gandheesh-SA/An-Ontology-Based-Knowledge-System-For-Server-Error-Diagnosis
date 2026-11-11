@@ -1,0 +1,468 @@
+@prefix diag: <https://example.org/server-troubleshooting#> .
+@prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
+@prefix noria: <https://w3id.org/noria/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+diag:FirmwareCategory a owl:Class ;
+    rdfs:label "FirmwareCategory"@en ;
+    rdfs:comment "An EventCategory concerned with firmware. It may overlap HardwareCategory and does not exhaust the parent class."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf diag:EventCategory ;
+    diag:datasetMapping "Reviewed classification of category individuals" ;
+    diag:modelRole "Subclass" .
+
+diag:HardwareCategory a owl:Class ;
+    rdfs:label "HardwareCategory"@en ;
+    rdfs:comment "An EventCategory concerned with hardware. It may overlap FirmwareCategory and does not exhaust the parent class."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf diag:EventCategory ;
+    diag:datasetMapping "Reviewed classification of category individuals" ;
+    diag:modelRole "Subclass" .
+
+diag:addressesCause a owl:ObjectProperty ;
+    rdfs:label "addressesCause"@en ;
+    rdfs:comment "Identifies a possible cause that this particular corrective instruction is intended to address. It expresses intended corrective relevance, not a proven successful repair. Assert only from reviewed item-specific source evidence, not by linking every item to all causes considered by its procedure. An item may both investigate and address the same cause."@en ;
+    rdfs:domain diag:ProcedureItem ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:PossibleCause ;
+    diag:populationStatus "Reviewed enrichment" ;
+    diag:relationshipCategory "Association" .
+
+diag:categoryName a owl:DatatypeProperty ;
+    rdfs:label "categoryName"@en ;
+    rdfs:comment "Readable category-individual name, inherited as an available property by the two category subclasses."@en ;
+    rdfs:domain diag:EventCategory ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "categories[]" .
+
+diag:causeCategory a owl:DatatypeProperty ;
+    rdfs:label "causeCategory"@en ;
+    rdfs:comment "Original source cause-classification token where present, such as a Cisco cause enumeration. This token is not an independently confirmed PossibleCause."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "cause_category" .
+
+diag:causeText a owl:DatatypeProperty ;
+    rdfs:label "causeText"@en ;
+    rdfs:comment "Verbatim/source-grounded possible-cause statement. Keep ambiguous blocks intact until reviewed; do not invent atomic causes."@en ;
+    rdfs:domain diag:PossibleCause ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "Explicit statement from troubleshooting[].cause_text" .
+
+diag:componentTypeName a owl:DatatypeProperty ;
+    rdfs:label "componentTypeName"@en ;
+    rdfs:comment "Readable component-kind name; source/classification evidence must accompany later population."@en ;
+    rdfs:domain diag:ComponentType ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "component_types[]" .
+
+diag:concernsComponentType a owl:ObjectProperty ;
+    rdfs:label "concernsComponentType"@en ;
+    rdfs:comment "Identifies a component kind implicated in the documented problem; it does not imply ownership."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:ComponentType ;
+    diag:populationStatus "Source-based" ;
+    diag:relationshipCategory "Association" .
+
+diag:datasetMapping a owl:AnnotationProperty ;
+    rdfs:label "datasetMapping"@en ;
+    rdfs:comment "Literal documentation of the source JSON field or population rule; not an executable mapping."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> .
+
+diag:eventCode a owl:DatatypeProperty ;
+    rdfs:label "eventCode"@en ;
+    rdfs:comment "Original event code as text, preserving leading zeros and hexadecimal notation; absent when the guide gives no code."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "event_code" .
+
+diag:eventName a owl:DatatypeProperty ;
+    rdfs:label "eventName"@en ;
+    rdfs:comment "Original event name or heading from the guide."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "event_name" .
+
+diag:eventNamespace a owl:DatatypeProperty ;
+    rdfs:label "eventNamespace"@en ;
+    rdfs:comment "Code namespace used by the source; prevents conflating codes from different systems or event classes."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "event_namespace" .
+
+diag:explanation a owl:DatatypeProperty ;
+    rdfs:label "explanation"@en ;
+    rdfs:comment "Source explanation of the reported condition. It is distinct from the event name and from a separately documented possible cause."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "explanation" .
+
+diag:hasBroaderCategory a owl:ObjectProperty,
+        owl:TransitiveProperty ;
+    rdfs:label "hasBroaderCategory"@en ;
+    rdfs:comment "Connects a category individual to a broader category individual. Transitivity supports hierarchical retrieval; this is not rdfs:subClassOf. Do not also declare this non-simple property asymmetric, irreflexive or functional in OWL 2 DL; validate hierarchy cycles separately."@en ;
+    rdfs:domain diag:EventCategory ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:EventCategory ;
+    diag:populationStatus "Reviewed enrichment" ;
+    diag:relationshipCategory "Association" .
+
+diag:hasCategory a owl:ObjectProperty ;
+    rdfs:label "hasCategory"@en ;
+    rdfs:comment "Assigns optional shared indexing categories across vendors; classification is not a confirmed causal statement."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:EventCategory ;
+    diag:populationStatus "Source-based" ;
+    diag:relationshipCategory "Association" .
+
+diag:hasPossibleCause a owl:ObjectProperty ;
+    rdfs:label "hasPossibleCause"@en ;
+    rdfs:comment "Derived through recommendsProcedure followed by considersCause. The property chain entails the shortcut; it is not an equivalence or a prohibition on other assertions. The population policy derives rather than independently maintains this link."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:PossibleCause ;
+    owl:propertyChainAxiom ( diag:recommendsProcedure diag:considersCause ) ;
+    diag:populationStatus "Derived" ;
+    diag:relationshipCategory "Association" .
+
+diag:investigatesCause a owl:ObjectProperty ;
+    rdfs:label "investigatesCause"@en ;
+    rdfs:comment "Identifies a possible cause that this particular printed instruction is intended to investigate or gather diagnostic evidence about. Assert only after reviewing the item and its full source-group context. It does not mean the check was executed or confirmed the cause; procedure membership alone does not entail this link."@en ;
+    rdfs:domain diag:ProcedureItem ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:PossibleCause ;
+    diag:populationStatus "Reviewed enrichment" ;
+    diag:relationshipCategory "Association" .
+
+diag:itemOrder a owl:DatatypeProperty ;
+    rdfs:label "itemOrder"@en ;
+    rdfs:comment "One-based printed item position within this procedure; not an execution dependency or a global order."@en ;
+    rdfs:domain diag:ProcedureItem ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:positiveInteger ;
+    diag:datasetMapping "troubleshooting[].steps[].order" .
+
+diag:itemText a owl:DatatypeProperty ;
+    rdfs:label "itemText"@en ;
+    rdfs:comment "Text of one printed item occurrence; retain the full procedure for its context."@en ;
+    rdfs:domain diag:ProcedureItem ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "troubleshooting[].steps[].text" .
+
+diag:messageArguments a owl:DatatypeProperty ;
+    rdfs:label "messageArguments"@en ;
+    rdfs:comment "Documented argument names and meanings, preserved as a JSON-encoded string. This is literal metadata, not a MessageParameter class or a formal parameter model. Do not assign event-level arguments to a variant unless their applicability is known."@en ;
+    rdfs:domain diag:MessageTemplate ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "message_arguments" .
+
+diag:messageText a owl:DatatypeProperty ;
+    rdfs:label "messageText"@en ;
+    rdfs:comment "Original message text preserving placeholders; not an actual incident observation."@en ;
+    rdfs:domain diag:MessageTemplate ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "Each messages[] value" .
+
+diag:modelRole a owl:AnnotationProperty ;
+    rdfs:label "modelRole"@en ;
+    rdfs:comment "Core, Supporting or Subclass role in this local design; not an OWL metaclass."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> .
+
+diag:nestingLevel a owl:DatatypeProperty ;
+    rdfs:label "nestingLevel"@en ;
+    rdfs:comment "Extracted zero-based indentation level. It is not a validated workflow nesting or dependency tree."@en ;
+    rdfs:domain diag:ProcedureItem ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:nonNegativeInteger ;
+    diag:datasetMapping "troubleshooting[].steps[].level" .
+
+diag:populationStatus a owl:AnnotationProperty ;
+    rdfs:label "populationStatus"@en ;
+    rdfs:comment "Source-based, Derived or Reviewed enrichment; vocabulary availability does not imply populated assertions."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> .
+
+diag:procedureLabel a owl:DatatypeProperty ;
+    rdfs:label "procedureLabel"@en ;
+    rdfs:comment "Original source solution-group label where present, for example Solution 1."@en ;
+    rdfs:domain diag:RecoveryProcedure ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "troubleshooting[].label" .
+
+diag:procedureText a owl:DatatypeProperty ;
+    rdfs:label "procedureText"@en ;
+    rdfs:comment "Complete original recommendation, including introductory conditions, warnings, alternatives, nested text and support escalation."@en ;
+    rdfs:domain diag:RecoveryProcedure ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "troubleshooting[].action_text" .
+
+diag:recordId a owl:DatatypeProperty ;
+    rdfs:label "recordId"@en ;
+    rdfs:comment "Globally scoped dataset record identifier; different vendor/code namespaces must remain distinct."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "record_id" .
+
+diag:relationshipCategory a owl:AnnotationProperty ;
+    rdfs:label "relationshipCategory"@en ;
+    rdfs:comment "UML relationship category annotation. Composition has no native OWL cascade-delete semantics."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> .
+
+diag:severity a owl:DatatypeProperty ;
+    rdfs:label "severity"@en ;
+    rdfs:comment "Documented/normalised severity where available; do not guess a missing severity."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "severity" .
+
+diag:similarTo a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "similarTo"@en ;
+    rdfs:comment "Connects assessed similar problem definitions, including cross-vendor candidates. Symmetry does not imply transitivity, equivalence, the same cause, or interchangeable recommendations."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:EventDefinition ;
+    diag:populationStatus "Reviewed enrichment" ;
+    diag:relationshipCategory "Association" .
+
+diag:sourceDocumentId a owl:DatatypeProperty ;
+    rdfs:label "sourceDocumentId"@en ;
+    rdfs:comment "Reference to the top-level dataset sources index, which retains guide title, edition, location and fingerprint without a local SourceDocument class."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "source.document_id" .
+
+diag:sourceLabel a owl:DatatypeProperty ;
+    rdfs:label "sourceLabel"@en ;
+    rdfs:comment "Original printed item marker, such as 1. or a., where available."@en ;
+    rdfs:domain diag:ProcedureItem ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "troubleshooting[].steps[].source_label" .
+
+diag:sourcePage a owl:DatatypeProperty ;
+    rdfs:label "sourcePage"@en ;
+    rdfs:comment "Physical one-based PDF page number supporting the definition. Multiple page values are allowed."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:positiveInteger ;
+    diag:datasetMapping "Each source.pdf_pages[] value" .
+
+diag:targetsComponentType a owl:ObjectProperty ;
+    rdfs:label "targetsComponentType"@en ;
+    rdfs:comment "Identifies a component explicitly investigated, updated or replaced in the action text. It may differ from the component implicated by the event."@en ;
+    rdfs:domain diag:RecoveryProcedure ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:ComponentType ;
+    diag:populationStatus "Reviewed enrichment" ;
+    diag:relationshipCategory "Association" .
+
+diag:vendor a owl:DatatypeProperty ;
+    rdfs:label "vendor"@en ;
+    rdfs:comment "Vendor publishing the documented event definition."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range xsd:string ;
+    diag:datasetMapping "vendor" .
+
+dul:Description a owl:Class ;
+    rdfs:label "Description"@en ;
+    rdfs:comment """A Description is a SocialObject that represents a conceptualization. 
+It can be thought also as a 'descriptive context' that uses or defines concepts in order to create a view on a 'relational context' (cf. Situation) out of a set of data or observations. 
+For example, a Plan is a Description of some actions to be executed by agents in a certain way, with certain parameters; a Diagnosis is a Description that provides an interpretation for a set of observed entities, etc.
+Descriptions 'define' or 'use' concepts, and can be 'satisfied' by situations.""" ;
+    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+    rdfs:subClassOf dul:SocialObject ;
+    owl:disjointWith dul:InformationObject .
+
+dul:InformationEntity a owl:Class ;
+    rdfs:label "Information Entity"@en ;
+    rdfs:comment """A piece of information, be it concretely realized or not. It is a catchall class, intended to bypass the ambiguities of many data or text that could denote either a an expression or a concrete realization of that expression.
+In a semiotic model, there is no special reason to distinguish between them, however we may want to distinguish between a pure information content (e.g. the 3rd Gymnopedie by Satie), and its possible concrete realizations as a music sheet, a piano execution, the reproduction of the execution, its publishing as a record, etc.).""" ;
+    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+    rdfs:subClassOf dul:Entity .
+
+dul:Object a owl:Class ;
+    rdfs:label "Object"@en ;
+    rdfs:comment "Any physical, social, or mental object, or a substance. Following DOLCE Full, objects are always participating in some event (at least their own life), and are spatially located." ;
+    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+    rdfs:subClassOf dul:Entity .
+
+dul:Plan a owl:Class ;
+    rdfs:label "Plan"@en ;
+    rdfs:comment "A Description having an explicit Goal, to be achieved by executing the plan" ;
+    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+    rdfs:subClassOf dul:Description .
+
+diag:considersCause a owl:ObjectProperty ;
+    rdfs:label "considersCause"@en ;
+    rdfs:comment "Connects a source procedure/solution group to an explicitly documented possible cause in that group. It does not confirm causation or map every printed item to every cause."@en ;
+    rdfs:domain diag:RecoveryProcedure ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:PossibleCause ;
+    diag:populationStatus "Source-based" ;
+    diag:relationshipCategory "Association" .
+
+diag:hasItem a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "hasItem"@en ;
+    rdfs:comment "Owns a printed item occurrence with exactly one procedure owner; identical wording in another procedure is a separate occurrence. Any cascade deletion is an application policy."@en ;
+    rdfs:domain diag:RecoveryProcedure ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:ProcedureItem ;
+    diag:populationStatus "Source-based" ;
+    diag:relationshipCategory "Composition" .
+
+noria:OperationPlan a owl:Class ;
+    rdfs:label "OperationPlan" ;
+    rdfs:comment "An abstract class representing a formal set of operations to be carried out in a standardized/controlled way."@en ;
+    rdfs:isDefinedBy noria: .
+
+dul:Concept a owl:Class ;
+    rdfs:label "Concept"@en ;
+    rdfs:comment """A Concept is a SocialObject, and isDefinedIn some Description; once defined, a Concept can be used in other Description(s). If a Concept isDefinedIn exactly one Description, see the LocalConcept class.
+The classifies relation relates Concept(s) to Entity(s) at some TimeInterval""" ;
+    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+    rdfs:subClassOf dul:SocialObject ;
+    owl:disjointWith dul:InformationObject .
+
+dul:Entity a owl:Class ;
+    rdfs:label "Entity"@en ;
+    rdfs:comment "Anything: real, possible, or imaginary, which some modeller wants to talk about for some purpose." ;
+    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> .
+
+diag:hasMessageTemplate a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "hasMessageTemplate"@en ;
+    rdfs:comment "Owns definition-specific message occurrences. Each message occurrence has exactly one definition owner; identical text can occur in another owned node. OWL does not execute cascade deletion."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:MessageTemplate ;
+    diag:populationStatus "Source-based" ;
+    diag:relationshipCategory "Composition" .
+
+diag:recommendsProcedure a owl:ObjectProperty ;
+    rdfs:label "recommendsProcedure"@en ;
+    rdfs:comment "References a complete documented recommendation. A procedure can be referenced without exclusive ownership; source-group context must be preserved."@en ;
+    rdfs:domain diag:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:range diag:RecoveryProcedure ;
+    diag:populationStatus "Source-based" ;
+    diag:relationshipCategory "Association" .
+
+dul:SocialObject a owl:Class ;
+    rdfs:label "Social object"@en ;
+    rdfs:comment """Any Object that exists only within some communication Event, in which at least one PhysicalObject participates in. 
+In other words, all objects that have been or are created in the process of social communication: for the sake of communication (InformationObject), for incorporating new individuals (SocialAgent, Place), for contextualizing or intepreting existing entities (Description, Concept), or for collecting existing entities (Collection).
+Being dependent on communication, all social objects need to be expressed by some information object (information objects are self-expressing).""" ;
+    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+    rdfs:subClassOf dul:Object .
+
+diag:ComponentType a owl:Class ;
+    rdfs:label "ComponentType"@en ;
+    rdfs:comment "A kind of hardware component, rather than a particular installed device; problem involvement and intervention targets are distinct."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf dul:Concept ;
+    diag:datasetMapping "component_types[]; targetsComponentType requires review of action text" ;
+    diag:modelRole "Core" .
+
+diag:MessageTemplate a owl:Class ;
+    rdfs:label "MessageTemplate"@en ;
+    rdfs:comment "A source-specific message-pattern occurrence owned by one event definition; preserve placeholders and documented variants."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass diag:EventDefinition ;
+            owl:onProperty [ owl:inverseOf diag:hasMessageTemplate ] ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        dul:InformationObject ;
+    diag:datasetMapping "Each messages[] entry; retain message_arguments as literal metadata" ;
+    diag:modelRole "Core" .
+
+diag:PossibleCause a owl:Class ;
+    rdfs:label "PossibleCause"@en ;
+    rdfs:comment "An explicitly documented possible explanation, retaining its source troubleshooting-group context; not a confirmed root cause."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf dul:InformationObject ;
+    diag:datasetMapping "Explicit statements in troubleshooting[].cause_text; do not infer causes from generic prose" ;
+    diag:modelRole "Core" .
+
+dul:InformationObject a owl:Class ;
+    rdfs:label "Information object"@en ;
+    rdfs:comment "A piece of information, such as a musical composition, a text, a word, a picture, independently from how it is concretely realized." ;
+    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+    rdfs:subClassOf dul:InformationEntity,
+        dul:SocialObject .
+
+diag:EventCategory a owl:Class ;
+    rdfs:label "EventCategory"@en ;
+    rdfs:comment "A shared indexing topic represented by category individuals. A category hierarchy is not a hierarchy of classes."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf dul:Concept ;
+    diag:datasetMapping "categories[] as individuals; a broader-category hierarchy needs reviewed enrichment" ;
+    diag:modelRole "Core" .
+
+diag:ProcedureItem a owl:Class ;
+    rdfs:label "ProcedureItem"@en ;
+    rdfs:comment "An owned printed item occurrence within a recovery procedure. Items preserve source order and may be instructions, options or component lists; they are not automatically executable steps."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass diag:RecoveryProcedure ;
+            owl:onProperty [ owl:inverseOf diag:hasItem ] ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        dul:InformationObject ;
+    diag:datasetMapping "troubleshooting[].steps[]: order, source_label, level, text" ;
+    diag:modelRole "Supporting" .
+
+diag:RecoveryProcedure a owl:Class ;
+    rdfs:label "RecoveryProcedure"@en ;
+    rdfs:comment "A complete documented troubleshooting recommendation, preserving alternatives, applicability, cautions, references and escalation; not a verified successful repair."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf dul:Plan,
+        noria:OperationPlan ;
+    diag:datasetMapping "Each troubleshooting[] group with action_text and its label" ;
+    diag:modelRole "Core" .
+
+diag:EventDefinition a owl:Class ;
+    rdfs:label "EventDefinition"@en ;
+    rdfs:comment "A source-specific documented event or problem definition, not an observed incident or a historical repair case."@en ;
+    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty diag:hasMessageTemplate ;
+            owl:someValuesFrom diag:MessageTemplate ],
+        [ a owl:Restriction ;
+            owl:onProperty diag:recommendsProcedure ;
+            owl:someValuesFrom diag:RecoveryProcedure ],
+        dul:InformationObject ;
+    diag:datasetMapping "record_id, vendor, event_code, event_namespace, event_name, severity, explanation, cause_category, source" ;
+    diag:modelRole "Core" .
+
+<https://example.org/server-troubleshooting> a owl:Ontology ;
+    rdfs:label "Server troubleshooting ontology"@en ;
+    rdfs:comment "Local schema for documented server hardware and firmware troubleshooting knowledge from Dell, Cisco and HPE guides. Nine local classes, twelve object properties and twenty-one dataset-aligned data properties. Item-level investigatesCause and addressesCause links require reviewed evidence and are not inferred from procedure membership. Eight local-to-external superclass alignments reuse NORIA-O as M1 and DUL as M2, with selected upstream axioms embedded offline rather than full imports. No incident instances, local core-class disjointness or extra EventDefinition subclasses are asserted. DUL named disjointness is retained for selected classes. PROV-O is excluded. HardwareCategory and FirmwareCategory may overlap and do not exhaust EventCategory. The example.org namespace is a project placeholder, not a claimed published vocabulary. OWL is open-world: constraints do not replace SHACL validation of actual records."@en ;
+    rdfs:seeAlso <https://www.w3.org/TR/owl2-mapping-to-rdf/>,
+        <https://www.w3.org/TR/owl2-primer/>,
+        <https://www.w3.org/TR/owl2-syntax/>,
+        <https://www.w3.org/TR/turtle/> ;
+    owl:versionIRI <https://example.org/server-troubleshooting/1.2.0> ;
+    owl:versionInfo "1.2.0" .
+
