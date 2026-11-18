@@ -106,7 +106,6 @@ These results measure schema quality, logical consistency, and declared data con
 
 - The dataset covers one Dell guide and has not yet been tested for cross-vendor interoperability.
 - Possible explanations and detailed instruction-to-explanation links have limited coverage. An absent link must not be read as proof that no explanation exists in the guide.
-- A recommendation is the vendor's documented advice, not evidence that it resolved an incident.
 - BM25, semantic retrieval, hybrid ranking, and LLM-based diagnosis have **not** been compared in this phase.
 - The included builder scripts were copied from the research workspace. Some still refer to the earlier `dell_test` directory layout or a source PDF outside this repository; update those paths before attempting a full rebuild. The prebuilt ontology and graph can be read and queried directly.
 
