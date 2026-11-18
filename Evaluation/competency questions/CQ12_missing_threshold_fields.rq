@@ -1,0 +1,16 @@
+# CQ12. Which threshold conditions lack all five structured threshold details?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT ?code ?conditionText ?populatedFields WHERE {
+  { SELECT ?condition (COUNT(DISTINCT ?field) AS ?populatedFields) WHERE {
+      ?condition a d:ThresholdCondition .
+      OPTIONAL {
+        VALUES ?field { d:thresholdDirection d:thresholdLevel d:comparisonOperator
+                        d:thresholdValue d:thresholdUnitText }
+        ?condition ?field ?value .
+      }
+    } GROUP BY ?condition }
+  FILTER (?populatedFields = 0)
+  ?event d:eventCode ?code ; d:describesCondition ?condition .
+  ?condition d:description ?conditionText .
+} ORDER BY ?code

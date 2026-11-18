@@ -1,0 +1,8 @@
+# CQ1. Which Critical and Warning events are recorded, and what condition does each report?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT ?code ?severity ?conditionText WHERE {
+  ?event d:eventCode ?code ; d:severity ?severity ;
+         d:describesCondition/d:description ?conditionText .
+  FILTER (STR(?severity) IN ("Critical", "Warning"))
+} ORDER BY ?code

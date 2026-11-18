@@ -1,0 +1,6 @@
+# CQ4. What complete troubleshooting response does the guide recommend for each event?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT ?code ?response WHERE {
+  ?event d:eventCode ?code ; d:hasDocumentedResponse/d:procedureText ?response .
+} ORDER BY ?code

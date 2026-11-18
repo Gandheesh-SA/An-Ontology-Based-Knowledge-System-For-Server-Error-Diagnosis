@@ -1,0 +1,10 @@
+# CQ5. For BAT0009, which instruction asks the engineer to inspect the system logs?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?code ?step ?instruction ?artifact WHERE {
+  VALUES ?code { "BAT0009"^^xsd:string }
+  ?event d:eventCode ?code ; d:hasDocumentedResponse/d:containsInstruction ?item .
+  ?item d:instructionOrder ?step ; d:instructionText ?instruction ; d:usesArtifactType/d:name ?artifact .
+  FILTER (STR(?artifact) = "System log")
+} ORDER BY ?step

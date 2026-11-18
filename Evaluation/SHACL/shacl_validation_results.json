@@ -1,0 +1,35 @@
+{
+  "validator": "pySHACL",
+  "knowledge_graph": "/Users/sagandheesh/Documents/1. Research/dell_test/knowledge graph/knowledge_graph.ttl",
+  "shapes_graph": "/Users/sagandheesh/Documents/1. Research/dell_test/knowledge graph/shapes.ttl",
+  "inference": "none",
+  "meta_shacl": true,
+  "conforms": true,
+  "validation_results": 0,
+  "data_triples": 339850,
+  "shapes_triples": 300,
+  "elapsed_seconds": 26.84,
+  "result_examples": [],
+  "coverage": {
+    "node_shapes": 15,
+    "property_shapes": 61,
+    "local_ontology_classes_targeted": 26,
+    "local_ontology_classes_total": 26,
+    "evidence_annotation_class_targeted": true,
+    "defined_object_properties_covered": 16,
+    "defined_object_properties_total": 16,
+    "instance_predicates_without_shape_path": 0
+  },
+  "independent_integrity_audit": {
+    "event_codes_checked": 6152,
+    "instruction_owners_checked": 10133,
+    "evidence_axioms_checked": 17064,
+    "duplicate_event_codes": 0,
+    "duplicate_instruction_orders_within_procedure": 0,
+    "instruction_order_or_owner_errors": 0,
+    "self_part_links": 0,
+    "similar_response_signature_errors": 0,
+    "evidence_annotations_without_asserted_triple": 0
+  },
+  "scope_note": "SHACL checks declared structure and values; the independent audit checks cross-record integrity. Neither proves correct troubleshooting interpretation or repair success."
+}

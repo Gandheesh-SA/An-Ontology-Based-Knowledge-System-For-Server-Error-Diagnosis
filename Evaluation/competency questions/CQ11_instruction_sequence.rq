@@ -1,0 +1,13 @@
+# CQ11. Which procedures have duplicate or nonconsecutive recorded instruction positions?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT ?code ?items ?distinctPositions ?first ?last WHERE {
+  { SELECT ?code ?procedure (COUNT(DISTINCT ?item) AS ?items)
+           (COUNT(DISTINCT ?position) AS ?distinctPositions)
+           (MIN(?position) AS ?first) (MAX(?position) AS ?last) WHERE {
+      ?event d:eventCode ?code ; d:hasDocumentedResponse ?procedure .
+      ?procedure d:containsInstruction ?item .
+      OPTIONAL { ?item d:instructionOrder ?position }
+    } GROUP BY ?code ?procedure }
+  FILTER (?items != ?distinctPositions || (?last - ?first + 1) != ?distinctPositions)
+} ORDER BY ?code

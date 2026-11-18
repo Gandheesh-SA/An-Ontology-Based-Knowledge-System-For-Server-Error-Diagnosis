@@ -1,0 +1,29 @@
+{
+  "graph": "/Users/sagandheesh/Documents/1. Research/dell_test/knowledge graph/knowledge_graph.ttl",
+  "total_triples": 339850,
+  "distinct_subjects": 46355,
+  "distinct_predicates": 41,
+  "distinct_objects": 68095,
+  "rdf_type_counts": {
+    "EventDefinition": 6152,
+    "RecoveryProcedure": 6152,
+    "ReportedCondition": 6152,
+    "ProcedureInstruction": 10133,
+    "PossibleExplanation": 656,
+    "ThresholdCondition": 162,
+    "OperationType": 19,
+    "ComponentType": 16,
+    "TechnicalProperty": 8,
+    "TechnicalArtifactType": 3,
+    "CorrectiveOperationType": 3,
+    "ProcessingComponentType": 2,
+    "InterconnectComponentType": 2,
+    "StorageComponentType": 2,
+    "PowerComponentType": 2,
+    "MemoryComponentType": 2,
+    "DiagnosticOperationType": 2,
+    "CoolingComponentType": 1,
+    "ManagementOperationType": 1
+  },
+  "interpretation": "The graph contains 6,152 event definitions, each with a reported condition and recovery procedure. It contains 10,133 individual procedure instructions and 656 possible explanations. The graph also contains schema and OWL axiom statements, which contribute to the total triple count."
+}

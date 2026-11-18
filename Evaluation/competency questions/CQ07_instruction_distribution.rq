@@ -1,0 +1,9 @@
+# CQ7. How many procedures contain each number of recorded instructions?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT ?instructions (COUNT(?procedure) AS ?procedures) WHERE {
+  { SELECT ?procedure (COUNT(DISTINCT ?item) AS ?instructions) WHERE {
+      ?procedure a d:RecoveryProcedure .
+      OPTIONAL { ?procedure d:containsInstruction ?item }
+    } GROUP BY ?procedure }
+} GROUP BY ?instructions ORDER BY ?instructions

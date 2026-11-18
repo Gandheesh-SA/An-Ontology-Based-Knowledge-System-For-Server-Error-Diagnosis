@@ -1,0 +1,7 @@
+# CQ2. Which events identify Memory as an affected component?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT DISTINCT ?code ?component WHERE {
+  ?event d:eventCode ?code ; d:describesCondition/d:concernsComponentType/d:name ?component .
+  FILTER (STR(?component) = "Memory")
+} ORDER BY ?code

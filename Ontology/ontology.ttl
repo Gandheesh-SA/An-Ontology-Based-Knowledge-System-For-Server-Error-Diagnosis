@@ -1,468 +1,609 @@
-@prefix diag: <https://example.org/server-troubleshooting#> .
+@prefix dell: <https://example.org/dell-troubleshooting#> .
 @prefix dul: <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#> .
 @prefix noria: <https://w3id.org/noria/ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix saref: <https://saref.etsi.org/core/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-diag:FirmwareCategory a owl:Class ;
-    rdfs:label "FirmwareCategory"@en ;
-    rdfs:comment "An EventCategory concerned with firmware. It may overlap HardwareCategory and does not exhaust the parent class."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:subClassOf diag:EventCategory ;
-    diag:datasetMapping "Reviewed classification of category individuals" ;
-    diag:modelRole "Subclass" .
+dell:AvailabilityCondition a owl:Class ;
+    rdfs:label "Availability Condition"@en ;
+    rdfs:comment "Availability Condition within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:ReportedCondition .
 
-diag:HardwareCategory a owl:Class ;
-    rdfs:label "HardwareCategory"@en ;
-    rdfs:comment "An EventCategory concerned with hardware. It may overlap FirmwareCategory and does not exhaust the parent class."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:subClassOf diag:EventCategory ;
-    diag:datasetMapping "Reviewed classification of category individuals" ;
-    diag:modelRole "Subclass" .
+dell:CompatibilityCondition a owl:Class ;
+    rdfs:label "Compatibility Condition"@en ;
+    rdfs:comment "Compatibility Condition within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:ReportedCondition .
 
-diag:addressesCause a owl:ObjectProperty ;
-    rdfs:label "addressesCause"@en ;
-    rdfs:comment "Identifies a possible cause that this particular corrective instruction is intended to address. It expresses intended corrective relevance, not a proven successful repair. Assert only from reviewed item-specific source evidence, not by linking every item to all causes considered by its procedure. An item may both investigate and address the same cause."@en ;
-    rdfs:domain diag:ProcedureItem ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:PossibleCause ;
-    diag:populationStatus "Reviewed enrichment" ;
-    diag:relationshipCategory "Association" .
+dell:CoolingComponentType a owl:Class ;
+    rdfs:label "Cooling Component Type"@en ;
+    rdfs:comment "Cooling Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:HardwareComponentType .
 
-diag:categoryName a owl:DatatypeProperty ;
-    rdfs:label "categoryName"@en ;
-    rdfs:comment "Readable category-individual name, inherited as an available property by the two category subclasses."@en ;
-    rdfs:domain diag:EventCategory ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "categories[]" .
+dell:CorrectiveOperationType a owl:Class ;
+    rdfs:label "Corrective Operation Type"@en ;
+    rdfs:comment "Corrective Operation Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:OperationType .
 
-diag:causeCategory a owl:DatatypeProperty ;
-    rdfs:label "causeCategory"@en ;
-    rdfs:comment "Original source cause-classification token where present, such as a Cisco cause enumeration. This token is not an independently confirmed PossibleCause."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "cause_category" .
+dell:DiagnosticOperationType a owl:Class ;
+    rdfs:label "Diagnostic Operation Type"@en ;
+    rdfs:comment "Diagnostic Operation Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:OperationType .
 
-diag:causeText a owl:DatatypeProperty ;
-    rdfs:label "causeText"@en ;
-    rdfs:comment "Verbatim/source-grounded possible-cause statement. Keep ambiguous blocks intact until reviewed; do not invent atomic causes."@en ;
-    rdfs:domain diag:PossibleCause ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "Explicit statement from troubleshooting[].cause_text" .
+dell:ErrorCondition a owl:Class ;
+    rdfs:label "Error Condition"@en ;
+    rdfs:comment "Error Condition within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:ReportedCondition .
 
-diag:componentTypeName a owl:DatatypeProperty ;
-    rdfs:label "componentTypeName"@en ;
-    rdfs:comment "Readable component-kind name; source/classification evidence must accompany later population."@en ;
-    rdfs:domain diag:ComponentType ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "component_types[]" .
+dell:FirmwareComponentType a owl:Class ;
+    rdfs:label "Firmware Component Type"@en ;
+    rdfs:comment "Firmware Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:ComponentType .
 
-diag:concernsComponentType a owl:ObjectProperty ;
-    rdfs:label "concernsComponentType"@en ;
-    rdfs:comment "Identifies a component kind implicated in the documented problem; it does not imply ownership."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:ComponentType ;
-    diag:populationStatus "Source-based" ;
-    diag:relationshipCategory "Association" .
+dell:IntegrityCondition a owl:Class ;
+    rdfs:label "Integrity Condition"@en ;
+    rdfs:comment "Integrity Condition within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:ReportedCondition .
 
-diag:datasetMapping a owl:AnnotationProperty ;
-    rdfs:label "datasetMapping"@en ;
-    rdfs:comment "Literal documentation of the source JSON field or population rule; not an executable mapping."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> .
+dell:InterconnectComponentType a owl:Class ;
+    rdfs:label "Interconnect Component Type"@en ;
+    rdfs:comment "Interconnect Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:HardwareComponentType .
 
-diag:eventCode a owl:DatatypeProperty ;
-    rdfs:label "eventCode"@en ;
-    rdfs:comment "Original event code as text, preserving leading zeros and hexadecimal notation; absent when the guide gives no code."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "event_code" .
+dell:ManagementOperationType a owl:Class ;
+    rdfs:label "Management Operation Type"@en ;
+    rdfs:comment "Management Operation Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:OperationType .
 
-diag:eventName a owl:DatatypeProperty ;
-    rdfs:label "eventName"@en ;
-    rdfs:comment "Original event name or heading from the guide."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "event_name" .
+dell:MemoryComponentType a owl:Class ;
+    rdfs:label "Memory Component Type"@en ;
+    rdfs:comment "Memory Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:HardwareComponentType .
 
-diag:eventNamespace a owl:DatatypeProperty ;
-    rdfs:label "eventNamespace"@en ;
-    rdfs:comment "Code namespace used by the source; prevents conflating codes from different systems or event classes."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "event_namespace" .
+dell:PowerComponentType a owl:Class ;
+    rdfs:label "Power Component Type"@en ;
+    rdfs:comment "Power Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:HardwareComponentType .
 
-diag:explanation a owl:DatatypeProperty ;
-    rdfs:label "explanation"@en ;
-    rdfs:comment "Source explanation of the reported condition. It is distinct from the event name and from a separately documented possible cause."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "explanation" .
+dell:ProcessingComponentType a owl:Class ;
+    rdfs:label "Processing Component Type"@en ;
+    rdfs:comment "Processing Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:HardwareComponentType .
 
-diag:hasBroaderCategory a owl:ObjectProperty,
+dell:SecurityComponentType a owl:Class ;
+    rdfs:label "Security Component Type"@en ;
+    rdfs:comment "Security Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:HardwareComponentType .
+
+dell:StorageComponentType a owl:Class ;
+    rdfs:label "Storage Component Type"@en ;
+    rdfs:comment "Storage Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:HardwareComponentType .
+
+dell:appearsBefore a owl:ObjectProperty,
         owl:TransitiveProperty ;
-    rdfs:label "hasBroaderCategory"@en ;
-    rdfs:comment "Connects a category individual to a broader category individual. Transitivity supports hierarchical retrieval; this is not rdfs:subClassOf. Do not also declare this non-simple property asymmetric, irreflexive or functional in OWL 2 DL; validate hierarchy cycles separately."@en ;
-    rdfs:domain diag:EventCategory ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:EventCategory ;
-    diag:populationStatus "Reviewed enrichment" ;
-    diag:relationshipCategory "Association" .
+    rdfs:label "appears Before"@en ;
+    rdfs:comment "Earlier in the source order within one procedure. Population must check procedure boundaries and cycles."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:ProcedureInstruction ;
+    dell:relationshipCategory "Association" .
 
-diag:hasCategory a owl:ObjectProperty ;
-    rdfs:label "hasCategory"@en ;
-    rdfs:comment "Assigns optional shared indexing categories across vendors; classification is not a confirmed causal statement."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:EventCategory ;
-    diag:populationStatus "Source-based" ;
-    diag:relationshipCategory "Association" .
+dell:argumentText a owl:DatatypeProperty ;
+    rdfs:label "argument Text"@en ;
+    rdfs:comment "Original documented placeholder names and meanings; not runtime bindings."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:hasPossibleCause a owl:ObjectProperty ;
-    rdfs:label "hasPossibleCause"@en ;
-    rdfs:comment "Derived through recommendsProcedure followed by considersCause. The property chain entails the shortcut; it is not an equivalence or a prohibition on other assertions. The population policy derives rather than independently maintains this link."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:PossibleCause ;
-    owl:propertyChainAxiom ( diag:recommendsProcedure diag:considersCause ) ;
-    diag:populationStatus "Derived" ;
-    diag:relationshipCategory "Association" .
+dell:attemptsToCorrectExplanation a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "attempts To Correct Explanation"@en ;
+    rdfs:comment "Identifies a documented possibility this instruction seeks to remedy."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:PossibleExplanation ;
+    dell:relationshipCategory "Association" .
 
-diag:investigatesCause a owl:ObjectProperty ;
-    rdfs:label "investigatesCause"@en ;
-    rdfs:comment "Identifies a possible cause that this particular printed instruction is intended to investigate or gather diagnostic evidence about. Assert only after reviewing the item and its full source-group context. It does not mean the check was executed or confirmed the cause; procedure membership alone does not entail this link."@en ;
-    rdfs:domain diag:ProcedureItem ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:PossibleCause ;
-    diag:populationStatus "Reviewed enrichment" ;
-    diag:relationshipCategory "Association" .
+dell:categoryText a owl:DatatypeProperty ;
+    rdfs:label "category Text"@en ;
+    rdfs:comment "Original Dell category and subsystem text."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:itemOrder a owl:DatatypeProperty ;
-    rdfs:label "itemOrder"@en ;
-    rdfs:comment "One-based printed item position within this procedure; not an execution dependency or a global order."@en ;
-    rdfs:domain diag:ProcedureItem ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:positiveInteger ;
-    diag:datasetMapping "troubleshooting[].steps[].order" .
+dell:comparisonOperator a owl:DatatypeProperty ;
+    rdfs:label "comparison Operator"@en ;
+    rdfs:comment "Optional source-supported LT, LE, GT, GE, EQ or NE comparison; preserves strict versus inclusive bounds."@en ;
+    rdfs:domain dell:ThresholdCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:itemText a owl:DatatypeProperty ;
-    rdfs:label "itemText"@en ;
-    rdfs:comment "Text of one printed item occurrence; retain the full procedure for its context."@en ;
-    rdfs:domain diag:ProcedureItem ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "troubleshooting[].steps[].text" .
+dell:competencyQuestion a owl:AnnotationProperty ;
+    rdfs:label "competency Question"@en ;
+    rdfs:comment "A question the populated catalogue should answer."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> .
 
-diag:messageArguments a owl:DatatypeProperty ;
-    rdfs:label "messageArguments"@en ;
-    rdfs:comment "Documented argument names and meanings, preserved as a JSON-encoded string. This is literal metadata, not a MessageParameter class or a formal parameter model. Do not assign event-level arguments to a variant unless their applicability is known."@en ;
-    rdfs:domain diag:MessageTemplate ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "message_arguments" .
+dell:conceptId a owl:DatatypeProperty ;
+    rdfs:label "concept Id"@en ;
+    rdfs:comment "A stable identifier within this model."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dell:EventDefinition dell:ComponentType dell:ReportedCondition dell:TechnicalProperty dell:PossibleExplanation dell:RecoveryProcedure dell:ProcedureInstruction dell:OperationType dell:TechnicalArtifactType ) ] ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:messageText a owl:DatatypeProperty ;
-    rdfs:label "messageText"@en ;
-    rdfs:comment "Original message text preserving placeholders; not an actual incident observation."@en ;
-    rdfs:domain diag:MessageTemplate ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "Each messages[] value" .
+dell:concernsComponentType a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "concerns Component Type"@en ;
+    rdfs:comment "Identifies the component kind affected by the condition."@en ;
+    rdfs:domain dell:ReportedCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:ComponentType ;
+    dell:relationshipCategory "Association" .
 
-diag:modelRole a owl:AnnotationProperty ;
-    rdfs:label "modelRole"@en ;
-    rdfs:comment "Core, Supporting or Subclass role in this local design; not an OWL metaclass."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> .
+dell:concernsTechnicalProperty a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "concerns Technical Property"@en ;
+    rdfs:comment "Identifies the property involved, such as fan speed."@en ;
+    rdfs:domain dell:ReportedCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:TechnicalProperty ;
+    dell:relationshipCategory "Association" .
 
-diag:nestingLevel a owl:DatatypeProperty ;
-    rdfs:label "nestingLevel"@en ;
-    rdfs:comment "Extracted zero-based indentation level. It is not a validated workflow nesting or dependency tree."@en ;
-    rdfs:domain diag:ProcedureItem ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:nonNegativeInteger ;
-    diag:datasetMapping "troubleshooting[].steps[].level" .
+dell:conditionText a owl:DatatypeProperty ;
+    rdfs:label "condition Text"@en ;
+    rdfs:comment "An explicit conditional qualification, such as If installed; does not assert it holds."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:populationStatus a owl:AnnotationProperty ;
-    rdfs:label "populationStatus"@en ;
-    rdfs:comment "Source-based, Derived or Reviewed enrichment; vocabulary availability does not imply populated assertions."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> .
+dell:describesAnomalyPattern a owl:ObjectProperty ;
+    rdfs:label "describes Anomaly Pattern"@en ;
+    rdfs:comment "Optional link when a reported condition describes a specifically identified NORIA anomaly pattern."@en ;
+    rdfs:domain dell:ReportedCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range noria:AnomalyPattern ;
+    dell:relationshipCategory "Association" .
 
-diag:procedureLabel a owl:DatatypeProperty ;
-    rdfs:label "procedureLabel"@en ;
-    rdfs:comment "Original source solution-group label where present, for example Solution 1."@en ;
-    rdfs:domain diag:RecoveryProcedure ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "troubleshooting[].label" .
+dell:describesCondition a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "describes Condition"@en ;
+    rdfs:comment "Identifies a condition described by the event message."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:ReportedCondition ;
+    dell:relationshipCategory "Association" .
 
-diag:procedureText a owl:DatatypeProperty ;
-    rdfs:label "procedureText"@en ;
-    rdfs:comment "Complete original recommendation, including introductory conditions, warnings, alternatives, nested text and support escalation."@en ;
-    rdfs:domain diag:RecoveryProcedure ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "troubleshooting[].action_text" .
+dell:description a owl:DatatypeProperty ;
+    rdfs:label "description"@en ;
+    rdfs:comment "Meaning of this concept or source-scoped statement."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dell:ComponentType dell:ReportedCondition dell:TechnicalProperty dell:PossibleExplanation dell:OperationType dell:TechnicalArtifactType ) ] ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:recordId a owl:DatatypeProperty ;
-    rdfs:label "recordId"@en ;
-    rdfs:comment "Globally scoped dataset record identifier; different vendor/code namespaces must remain distinct."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "record_id" .
+dell:eventCode a owl:DatatypeProperty ;
+    rdfs:label "event Code"@en ;
+    rdfs:comment "Original event code."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:relationshipCategory a owl:AnnotationProperty ;
-    rdfs:label "relationshipCategory"@en ;
-    rdfs:comment "UML relationship category annotation. Composition has no native OWL cascade-delete semantics."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> .
+dell:evidenceDocumentId a owl:AnnotationProperty ;
+    rdfs:label "evidence Document Id"@en ;
+    rdfs:comment "Guide and edition supporting this particular relationship."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> .
 
-diag:severity a owl:DatatypeProperty ;
+dell:evidencePage a owl:AnnotationProperty ;
+    rdfs:label "evidence Page"@en ;
+    rdfs:comment "Physical PDF page supporting this particular relationship."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> .
+
+dell:evidenceQuote a owl:AnnotationProperty ;
+    rdfs:label "evidence Quote"@en ;
+    rdfs:comment "Source wording supporting this particular relationship."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> .
+
+dell:explanationText a owl:DatatypeProperty ;
+    rdfs:label "explanation Text"@en ;
+    rdfs:comment "Full original detailed-description section, including no-description statements."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:hasDocumentedPartType a owl:IrreflexiveProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has Documented Part Type"@en ;
+    rdfs:comment "Records an explicitly documented whole-to-part link between distinct component kinds."@en ;
+    rdfs:domain dell:ComponentType ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:ComponentType ;
+    dell:relationshipCategory "Shared aggregation" .
+
+dell:hasDocumentedResponse a owl:AsymmetricProperty,
+        owl:FunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has Documented Response"@en ;
+    rdfs:comment "Links an entry to its complete response block, which can contain alternatives."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:RecoveryProcedure ;
+    dell:relationshipCategory "Association" .
+
+dell:hasPossibleExplanation a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "has Possible Explanation"@en ;
+    rdfs:comment "Links a condition to a possibility supported by the source wording."@en ;
+    rdfs:domain dell:ReportedCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:PossibleExplanation ;
+    dell:relationshipCategory "Association" .
+
+dell:instructionOrder a owl:DatatypeProperty ;
+    rdfs:label "instruction Order"@en ;
+    rdfs:comment "Unique source reading position within the procedure, not an execution dependency."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:positiveInteger .
+
+dell:instructionPath a owl:DatatypeProperty ;
+    rdfs:label "instruction Path"@en ;
+    rdfs:comment "Optional source nesting position, such as 2.b; not a second ordering algorithm."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:instructionText a owl:DatatypeProperty ;
+    rdfs:label "instruction Text"@en ;
+    rdfs:comment "A reviewed instruction span with its local qualifications intact."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:investigatesExplanation a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "investigates Explanation"@en ;
+    rdfs:comment "Identifies a documented possibility that this instruction checks."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:PossibleExplanation ;
+    dell:relationshipCategory "Association" .
+
+dell:locationText a owl:DatatypeProperty ;
+    rdfs:label "location Text"@en ;
+    rdfs:comment "Documented slot, bay or other location wording, preserving placeholders."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:mappingStatus a owl:AnnotationProperty ;
+    rdfs:label "mapping Status"@en ;
+    rdfs:comment "SOURCE_SUPPORTED_INTERPRETATION identifies a reviewed mapping, not vendor verification or repair success."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> .
+
+dell:messageText a owl:DatatypeProperty ;
+    rdfs:label "message Text"@en ;
+    rdfs:comment "Original message, retaining placeholders."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:name a owl:DatatypeProperty ;
+    rdfs:label "name"@en ;
+    rdfs:comment "A readable source-grounded name."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dell:EventDefinition dell:ComponentType dell:ReportedCondition dell:TechnicalProperty dell:PossibleExplanation dell:RecoveryProcedure dell:ProcedureInstruction dell:OperationType dell:TechnicalArtifactType ) ] ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:platformAlertText a owl:DatatypeProperty ;
+    rdfs:label "platform Alert Text"@en ;
+    rdfs:comment "Original platform-qualified applicability/default settings; not proof an alert was sent."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:procedureText a owl:DatatypeProperty ;
+    rdfs:label "procedure Text"@en ;
+    rdfs:comment "Complete response represented by this procedure, retaining order, conditions and cautions."@en ;
+    rdfs:domain dell:RecoveryProcedure ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:qualifierText a owl:DatatypeProperty ;
+    rdfs:label "qualifier Text"@en ;
+    rdfs:comment "Source wording such as may, either/or, or platform qualifications."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dell:ReportedCondition dell:PossibleExplanation ) ] ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:recommendedResponseText a owl:DatatypeProperty ;
+    rdfs:label "recommended Response Text"@en ;
+    rdfs:comment "Full original response, including pure no-action policies and cautions."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:relationshipCategory a owl:AnnotationProperty ;
+    rdfs:label "relationship Category"@en ;
+    rdfs:comment "UML presentation category; not a built-in OWL property characteristic."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> .
+
+dell:requestsArtifactType a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "requests Artifact Type"@en ;
+    rdfs:comment "Identifies a deliverable requested for generation or collection."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:TechnicalArtifactType ;
+    dell:relationshipCategory "Association" .
+
+dell:requestsOperationType a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "requests Operation Type"@en ;
+    rdfs:comment "Classifies the work requested by the instruction."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:OperationType ;
+    dell:relationshipCategory "Association" .
+
+dell:restrictionText a owl:DatatypeProperty ;
+    rdfs:label "restriction Text"@en ;
+    rdfs:comment "An explicit caution or prohibition; not a verified runtime guard."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:severity a owl:DatatypeProperty ;
     rdfs:label "severity"@en ;
-    rdfs:comment "Documented/normalised severity where available; do not guess a missing severity."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "severity" .
+    rdfs:comment "Original Critical or Warning value in this dataset profile."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:similarTo a owl:ObjectProperty,
-        owl:SymmetricProperty ;
-    rdfs:label "similarTo"@en ;
-    rdfs:comment "Connects assessed similar problem definitions, including cross-vendor candidates. Symmetry does not imply transitivity, equivalence, the same cause, or interchangeable recommendations."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:EventDefinition ;
-    diag:populationStatus "Reviewed enrichment" ;
-    diag:relationshipCategory "Association" .
+dell:similarEvent a owl:ObjectProperty,
+        owl:ReflexiveProperty,
+        owl:SymmetricProperty,
+        owl:TransitiveProperty ;
+    rdfs:label "similar Event"@en ;
+    rdfs:comment "Same typed catalogue content signature, preserving order, qualifiers and values. Compare distinct records only from complete signatures after whitespace normalization. Reflexivity also relates every individual to itself."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    dell:relationshipCategory "Association" .
 
-diag:sourceDocumentId a owl:DatatypeProperty ;
-    rdfs:label "sourceDocumentId"@en ;
-    rdfs:comment "Reference to the top-level dataset sources index, which retains guide title, edition, location and fingerprint without a local SourceDocument class."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "source.document_id" .
+dell:sourceDocumentId a owl:DatatypeProperty ;
+    rdfs:label "source Document Id"@en ;
+    rdfs:comment "Source guide and edition identifier; reusable concepts may have several sources."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dell:EventDefinition dell:ComponentType dell:ReportedCondition dell:TechnicalProperty dell:PossibleExplanation dell:RecoveryProcedure dell:ProcedureInstruction dell:OperationType dell:TechnicalArtifactType ) ] ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:sourceLabel a owl:DatatypeProperty ;
-    rdfs:label "sourceLabel"@en ;
-    rdfs:comment "Original printed item marker, such as 1. or a., where available."@en ;
-    rdfs:domain diag:ProcedureItem ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "troubleshooting[].steps[].source_label" .
+dell:sourceEventText a owl:DatatypeProperty ;
+    rdfs:label "source Event Text"@en ;
+    rdfs:comment "Complete extracted entry, preserving vendor metadata and repeated platform sections."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:sourcePage a owl:DatatypeProperty ;
-    rdfs:label "sourcePage"@en ;
-    rdfs:comment "Physical one-based PDF page number supporting the definition. Multiple page values are allowed."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:positiveInteger ;
-    diag:datasetMapping "Each source.pdf_pages[] value" .
+dell:sourcePage a owl:DatatypeProperty ;
+    rdfs:label "source Page"@en ;
+    rdfs:comment "Physical PDF page number; multiple pages may support an entity."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dell:EventDefinition dell:ComponentType dell:ReportedCondition dell:TechnicalProperty dell:PossibleExplanation dell:RecoveryProcedure dell:ProcedureInstruction dell:OperationType dell:TechnicalArtifactType ) ] ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:positiveInteger .
 
-diag:targetsComponentType a owl:ObjectProperty ;
-    rdfs:label "targetsComponentType"@en ;
-    rdfs:comment "Identifies a component explicitly investigated, updated or replaced in the action text. It may differ from the component implicated by the event."@en ;
-    rdfs:domain diag:RecoveryProcedure ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:ComponentType ;
-    diag:populationStatus "Reviewed enrichment" ;
-    diag:relationshipCategory "Association" .
+dell:sourceQuote a owl:DatatypeProperty ;
+    rdfs:label "source Quote"@en ;
+    rdfs:comment "Supporting source wording; preserves qualifications."@en ;
+    rdfs:domain [ a owl:Class ;
+            owl:unionOf ( dell:EventDefinition dell:ComponentType dell:ReportedCondition dell:TechnicalProperty dell:PossibleExplanation dell:RecoveryProcedure dell:ProcedureInstruction dell:OperationType dell:TechnicalArtifactType ) ] ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-diag:vendor a owl:DatatypeProperty ;
-    rdfs:label "vendor"@en ;
-    rdfs:comment "Vendor publishing the documented event definition."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range xsd:string ;
-    diag:datasetMapping "vendor" .
+dell:sourceStepLabel a owl:DatatypeProperty ;
+    rdfs:label "source Step Label"@en ;
+    rdfs:comment "Original numbering or bullet label, where present."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-dul:Description a owl:Class ;
-    rdfs:label "Description"@en ;
-    rdfs:comment """A Description is a SocialObject that represents a conceptualization. 
-It can be thought also as a 'descriptive context' that uses or defines concepts in order to create a view on a 'relational context' (cf. Situation) out of a set of data or observations. 
-For example, a Plan is a Description of some actions to be executed by agents in a certain way, with certain parameters; a Diagnosis is a Description that provides an interpretation for a set of observed entities, etc.
-Descriptions 'define' or 'use' concepts, and can be 'satisfied' by situations.""" ;
-    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
-    rdfs:subClassOf dul:SocialObject ;
-    owl:disjointWith dul:InformationObject .
+dell:targetsComponentType a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "targets Component Type"@en ;
+    rdfs:comment "Identifies the kind of component to check or act on."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:ComponentType ;
+    dell:relationshipCategory "Association" .
 
-dul:InformationEntity a owl:Class ;
-    rdfs:label "Information Entity"@en ;
-    rdfs:comment """A piece of information, be it concretely realized or not. It is a catchall class, intended to bypass the ambiguities of many data or text that could denote either a an expression or a concrete realization of that expression.
-In a semiotic model, there is no special reason to distinguish between them, however we may want to distinguish between a pure information content (e.g. the 3rd Gymnopedie by Satie), and its possible concrete realizations as a music sheet, a piano execution, the reproduction of the execution, its publishing as a record, etc.).""" ;
-    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
-    rdfs:subClassOf dul:Entity .
+dell:thresholdDirection a owl:DatatypeProperty ;
+    rdfs:label "threshold Direction"@en ;
+    rdfs:comment "Source-supported ABOVE or BELOW relation to the threshold."@en ;
+    rdfs:domain dell:ThresholdCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-dul:Object a owl:Class ;
-    rdfs:label "Object"@en ;
-    rdfs:comment "Any physical, social, or mental object, or a substance. Following DOLCE Full, objects are always participating in some event (at least their own life), and are spatially located." ;
-    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
-    rdfs:subClassOf dul:Entity .
+dell:thresholdLevel a owl:DatatypeProperty ;
+    rdfs:label "threshold Level"@en ;
+    rdfs:comment "Source-supported threshold band, such as Warning or Critical."@en ;
+    rdfs:domain dell:ThresholdCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
 
-dul:Plan a owl:Class ;
-    rdfs:label "Plan"@en ;
-    rdfs:comment "A Description having an explicit Goal, to be achieved by executing the plan" ;
-    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
+dell:thresholdUnitText a owl:DatatypeProperty ;
+    rdfs:label "threshold Unit Text"@en ;
+    rdfs:comment "Source unit for an explicit numeric threshold; no unit conversion implied."@en ;
+    rdfs:domain dell:ThresholdCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:thresholdValue a owl:DatatypeProperty ;
+    rdfs:label "threshold Value"@en ;
+    rdfs:comment "A numeric threshold explicitly present in the source, not an observed measurement."@en ;
+    rdfs:domain dell:ThresholdCondition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:decimal .
+
+dell:toolText a owl:DatatypeProperty ;
+    rdfs:label "tool Text"@en ;
+    rdfs:comment "Documented tool, interface or command wording."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dell:usesArtifactType a owl:AsymmetricProperty,
+        owl:ObjectProperty ;
+    rdfs:label "uses Artifact Type"@en ;
+    rdfs:comment "Identifies the kind of file or information inspected or used."@en ;
+    rdfs:domain dell:ProcedureInstruction ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:TechnicalArtifactType ;
+    dell:relationshipCategory "Association" .
+
+dell:vendorMetadataText a owl:DatatypeProperty ;
+    rdfs:label "vendor Metadata Text"@en ;
+    rdfs:comment "Original label/value text for optional vendor fields, including LCD and trap identifiers."@en ;
+    rdfs:domain dell:EventDefinition ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range xsd:string .
+
+dul:Plan a owl:Class .
+
+saref:FeatureKind a owl:Class .
+
+saref:Property a owl:Class .
+
+noria:AnomalyPattern a owl:Class .
+
+noria:OperationPlan a owl:Class .
+
+dul:Description a owl:Class .
+
+dul:InformationObject a owl:Class .
+
+dell:containsInstruction a owl:AsymmetricProperty,
+        owl:InverseFunctionalProperty,
+        owl:ObjectProperty ;
+    rdfs:label "contains Instruction"@en ;
+    rdfs:comment "Owns an instruction occurrence within this response. Identical words in another response are a separate occurrence."@en ;
+    rdfs:domain dell:RecoveryProcedure ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:range dell:ProcedureInstruction ;
+    dell:relationshipCategory "Composition" .
+
+dul:Concept a owl:Class .
+
+dell:ThresholdCondition a owl:Class ;
+    rdfs:label "Threshold Condition"@en ;
+    rdfs:comment "Threshold Condition within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:ReportedCondition .
+
+dell:HardwareComponentType a owl:Class ;
+    rdfs:label "Hardware Component Type"@en ;
+    rdfs:comment "Hardware Component Type within the Dell troubleshooting catalogue."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dell:ComponentType .
+
+dell:TechnicalProperty a owl:Class ;
+    rdfs:label "Technical Property"@en ;
+    rdfs:comment "A property concept such as fan speed or voltage, not a measured value."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dul:Concept,
+        saref:Property .
+
+dell:TechnicalArtifactType a owl:Class ;
+    rdfs:label "Technical Artifact Type"@en ;
+    rdfs:comment "A reusable type of information artifact, not an actual log file or generated report."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dul:Concept .
+
+dell:RecoveryProcedure a owl:Class ;
+    rdfs:label "Recovery Procedure"@en ;
+    rdfs:comment "A complete documented troubleshooting response, not a proven repair or executable workflow."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onProperty dell:containsInstruction ;
+            owl:someValuesFrom dell:ProcedureInstruction ],
+        dul:Plan,
+        noria:OperationPlan .
+
+dell:OperationType a owl:Class ;
+    rdfs:label "Operation Type"@en ;
+    rdfs:comment "A reusable operation concept; classification does not establish safety or success."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dul:Concept .
+
+dell:PossibleExplanation a owl:Class ;
+    rdfs:label "Possible Explanation"@en ;
+    rdfs:comment "A documented possible explanation, retaining alternatives and uncertainty."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
     rdfs:subClassOf dul:Description .
 
-diag:considersCause a owl:ObjectProperty ;
-    rdfs:label "considersCause"@en ;
-    rdfs:comment "Connects a source procedure/solution group to an explicitly documented possible cause in that group. It does not confirm causation or map every printed item to every cause."@en ;
-    rdfs:domain diag:RecoveryProcedure ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:PossibleCause ;
-    diag:populationStatus "Source-based" ;
-    diag:relationshipCategory "Association" .
+dell:ComponentType a owl:Class ;
+    rdfs:label "Component Type"@en ;
+    rdfs:comment "A reusable concept describing a component type, not an installed device."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dul:Concept,
+        saref:FeatureKind .
 
-diag:hasItem a owl:AsymmetricProperty,
-        owl:ObjectProperty ;
-    rdfs:label "hasItem"@en ;
-    rdfs:comment "Owns a printed item occurrence with exactly one procedure owner; identical wording in another procedure is a separate occurrence. Any cascade deletion is an application policy."@en ;
-    rdfs:domain diag:RecoveryProcedure ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:ProcedureItem ;
-    diag:populationStatus "Source-based" ;
-    diag:relationshipCategory "Composition" .
+dell:EventDefinition a owl:Class ;
+    rdfs:label "Event Definition"@en ;
+    rdfs:comment "A versioned Dell catalogue entry, not an observed incident."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dul:InformationObject .
 
-noria:OperationPlan a owl:Class ;
-    rdfs:label "OperationPlan" ;
-    rdfs:comment "An abstract class representing a formal set of operations to be carried out in a standardized/controlled way."@en ;
-    rdfs:isDefinedBy noria: .
+dell:ReportedCondition a owl:Class ;
+    rdfs:label "Reported Condition"@en ;
+    rdfs:comment "A source-supported reported state or problem pattern, scoped to its definition."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
+    rdfs:subClassOf dul:Description .
 
-dul:Concept a owl:Class ;
-    rdfs:label "Concept"@en ;
-    rdfs:comment """A Concept is a SocialObject, and isDefinedIn some Description; once defined, a Concept can be used in other Description(s). If a Concept isDefinedIn exactly one Description, see the LocalConcept class.
-The classifies relation relates Concept(s) to Entity(s) at some TimeInterval""" ;
-    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
-    rdfs:subClassOf dul:SocialObject ;
-    owl:disjointWith dul:InformationObject .
-
-dul:Entity a owl:Class ;
-    rdfs:label "Entity"@en ;
-    rdfs:comment "Anything: real, possible, or imaginary, which some modeller wants to talk about for some purpose." ;
-    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> .
-
-diag:hasMessageTemplate a owl:AsymmetricProperty,
-        owl:ObjectProperty ;
-    rdfs:label "hasMessageTemplate"@en ;
-    rdfs:comment "Owns definition-specific message occurrences. Each message occurrence has exactly one definition owner; identical text can occur in another owned node. OWL does not execute cascade deletion."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:MessageTemplate ;
-    diag:populationStatus "Source-based" ;
-    diag:relationshipCategory "Composition" .
-
-diag:recommendsProcedure a owl:ObjectProperty ;
-    rdfs:label "recommendsProcedure"@en ;
-    rdfs:comment "References a complete documented recommendation. A procedure can be referenced without exclusive ownership; source-group context must be preserved."@en ;
-    rdfs:domain diag:EventDefinition ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:range diag:RecoveryProcedure ;
-    diag:populationStatus "Source-based" ;
-    diag:relationshipCategory "Association" .
-
-dul:SocialObject a owl:Class ;
-    rdfs:label "Social object"@en ;
-    rdfs:comment """Any Object that exists only within some communication Event, in which at least one PhysicalObject participates in. 
-In other words, all objects that have been or are created in the process of social communication: for the sake of communication (InformationObject), for incorporating new individuals (SocialAgent, Place), for contextualizing or intepreting existing entities (Description, Concept), or for collecting existing entities (Collection).
-Being dependent on communication, all social objects need to be expressed by some information object (information objects are self-expressing).""" ;
-    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
-    rdfs:subClassOf dul:Object .
-
-diag:ComponentType a owl:Class ;
-    rdfs:label "ComponentType"@en ;
-    rdfs:comment "A kind of hardware component, rather than a particular installed device; problem involvement and intervention targets are distinct."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:subClassOf dul:Concept ;
-    diag:datasetMapping "component_types[]; targetsComponentType requires review of action text" ;
-    diag:modelRole "Core" .
-
-diag:MessageTemplate a owl:Class ;
-    rdfs:label "MessageTemplate"@en ;
-    rdfs:comment "A source-specific message-pattern occurrence owned by one event definition; preserve placeholders and documented variants."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
+dell:ProcedureInstruction a owl:Class ;
+    rdfs:label "Procedure Instruction"@en ;
+    rdfs:comment "A procedure-owned instruction occurrence, preserving its source context."@en ;
+    rdfs:isDefinedBy <https://example.org/dell-troubleshooting> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass diag:EventDefinition ;
-            owl:onProperty [ owl:inverseOf diag:hasMessageTemplate ] ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        dul:InformationObject ;
-    diag:datasetMapping "Each messages[] entry; retain message_arguments as literal metadata" ;
-    diag:modelRole "Core" .
+            owl:onProperty [ owl:inverseOf dell:containsInstruction ] ;
+            owl:someValuesFrom dell:RecoveryProcedure ],
+        dul:InformationObject .
 
-diag:PossibleCause a owl:Class ;
-    rdfs:label "PossibleCause"@en ;
-    rdfs:comment "An explicitly documented possible explanation, retaining its source troubleshooting-group context; not a confirmed root cause."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:subClassOf dul:InformationObject ;
-    diag:datasetMapping "Explicit statements in troubleshooting[].cause_text; do not infer causes from generic prose" ;
-    diag:modelRole "Core" .
-
-dul:InformationObject a owl:Class ;
-    rdfs:label "Information object"@en ;
-    rdfs:comment "A piece of information, such as a musical composition, a text, a word, a picture, independently from how it is concretely realized." ;
-    rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl> ;
-    rdfs:subClassOf dul:InformationEntity,
-        dul:SocialObject .
-
-diag:EventCategory a owl:Class ;
-    rdfs:label "EventCategory"@en ;
-    rdfs:comment "A shared indexing topic represented by category individuals. A category hierarchy is not a hierarchy of classes."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:subClassOf dul:Concept ;
-    diag:datasetMapping "categories[] as individuals; a broader-category hierarchy needs reviewed enrichment" ;
-    diag:modelRole "Core" .
-
-diag:ProcedureItem a owl:Class ;
-    rdfs:label "ProcedureItem"@en ;
-    rdfs:comment "An owned printed item occurrence within a recovery procedure. Items preserve source order and may be instructions, options or component lists; they are not automatically executable steps."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass diag:RecoveryProcedure ;
-            owl:onProperty [ owl:inverseOf diag:hasItem ] ;
-            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
-        dul:InformationObject ;
-    diag:datasetMapping "troubleshooting[].steps[]: order, source_label, level, text" ;
-    diag:modelRole "Supporting" .
-
-diag:RecoveryProcedure a owl:Class ;
-    rdfs:label "RecoveryProcedure"@en ;
-    rdfs:comment "A complete documented troubleshooting recommendation, preserving alternatives, applicability, cautions, references and escalation; not a verified successful repair."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:subClassOf dul:Plan,
-        noria:OperationPlan ;
-    diag:datasetMapping "Each troubleshooting[] group with action_text and its label" ;
-    diag:modelRole "Core" .
-
-diag:EventDefinition a owl:Class ;
-    rdfs:label "EventDefinition"@en ;
-    rdfs:comment "A source-specific documented event or problem definition, not an observed incident or a historical repair case."@en ;
-    rdfs:isDefinedBy <https://example.org/server-troubleshooting> ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onProperty diag:hasMessageTemplate ;
-            owl:someValuesFrom diag:MessageTemplate ],
-        [ a owl:Restriction ;
-            owl:onProperty diag:recommendsProcedure ;
-            owl:someValuesFrom diag:RecoveryProcedure ],
-        dul:InformationObject ;
-    diag:datasetMapping "record_id, vendor, event_code, event_namespace, event_name, severity, explanation, cause_category, source" ;
-    diag:modelRole "Core" .
-
-<https://example.org/server-troubleshooting> a owl:Ontology ;
-    rdfs:label "Server troubleshooting ontology"@en ;
-    rdfs:comment "Local schema for documented server hardware and firmware troubleshooting knowledge from Dell, Cisco and HPE guides. Nine local classes, twelve object properties and twenty-one dataset-aligned data properties. Item-level investigatesCause and addressesCause links require reviewed evidence and are not inferred from procedure membership. Eight local-to-external superclass alignments reuse NORIA-O as M1 and DUL as M2, with selected upstream axioms embedded offline rather than full imports. No incident instances, local core-class disjointness or extra EventDefinition subclasses are asserted. DUL named disjointness is retained for selected classes. PROV-O is excluded. HardwareCategory and FirmwareCategory may overlap and do not exhaust EventCategory. The example.org namespace is a project placeholder, not a claimed published vocabulary. OWL is open-world: constraints do not replace SHACL validation of actual records."@en ;
-    rdfs:seeAlso <https://www.w3.org/TR/owl2-mapping-to-rdf/>,
-        <https://www.w3.org/TR/owl2-primer/>,
-        <https://www.w3.org/TR/owl2-syntax/>,
-        <https://www.w3.org/TR/turtle/> ;
-    owl:versionIRI <https://example.org/server-troubleshooting/1.2.0> ;
-    owl:versionInfo "1.2.0" .
+<https://example.org/dell-troubleshooting> a owl:Ontology ;
+    rdfs:label "Dell server troubleshooting catalogue ontology"@en ;
+    rdfs:comment "Schema for documented Critical and Warning entries, their explanations and recommended responses. External class IRIs are reused selectively."@en ;
+    rdfs:seeAlso <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl>,
+        <https://cdn.aaai.org/Symposia/Spring/1997/SS-97-06/SS97-06-005.pdf>,
+        <https://dl.dell.com/content/manual64973867-poweredge-servers-error-and-event-messages-reference-guide.pdf>,
+        <https://doi.org/10.1007/978-3-031-60635-9_2>,
+        <https://saref.etsi.org/core/v4.1.1/>,
+        noria:,
+        <https://www.w3.org/TR/owl2-syntax/> ;
+    owl:versionIRI <https://example.org/dell-troubleshooting/dell-catalogue/1.0> ;
+    dell:competencyQuestion "What complete response is recommended, including no-action policies, conditions and warnings?"@en,
+        "What documented possibilities explain this condition, retaining uncertainty and alternatives?"@en,
+        "What information artifacts are used versus requested as outputs?"@en,
+        "Which definition reports a given condition, component type and technical property?"@en,
+        "Which explicit threshold direction, level, value and unit does the source document?"@en,
+        "Which instruction investigates or attempts to address which documented possibility, with what source support?"@en,
+        "Which instructions belong to a procedure, and in what source order and nesting?"@en,
+        "Which source entry and pages support the retrieved recommendation and each interpreted relationship?"@en .
 

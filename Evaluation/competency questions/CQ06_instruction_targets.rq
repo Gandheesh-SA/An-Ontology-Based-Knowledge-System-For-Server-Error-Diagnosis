@@ -1,0 +1,10 @@
+# CQ6. For BAT0009 and BAT0014, which component does each instruction target?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?code ?step ?instruction ?component WHERE {
+  VALUES ?code { "BAT0009"^^xsd:string "BAT0014"^^xsd:string }
+  ?event d:eventCode ?code ; d:hasDocumentedResponse/d:containsInstruction ?item .
+  ?item d:instructionOrder ?step ; d:instructionText ?instruction .
+  OPTIONAL { ?item d:targetsComponentType/d:name ?component }
+} ORDER BY ?code ?step ?component

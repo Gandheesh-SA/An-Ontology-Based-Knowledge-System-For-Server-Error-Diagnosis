@@ -1,0 +1,14 @@
+# CQ8. Which events have the largest number of recorded instructions?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT ?code ?instructions WHERE {
+  { SELECT (MAX(?count) AS ?maximum) WHERE {
+      { SELECT ?event (COUNT(DISTINCT ?item) AS ?count) WHERE {
+          ?event d:eventCode ?eventCode ; d:hasDocumentedResponse/d:containsInstruction ?item .
+        } GROUP BY ?event }
+    } }
+  { SELECT ?code (COUNT(DISTINCT ?item) AS ?instructions) WHERE {
+      ?event d:eventCode ?code ; d:hasDocumentedResponse/d:containsInstruction ?item .
+    } GROUP BY ?code }
+  FILTER (?instructions = ?maximum)
+} ORDER BY ?code

@@ -1,0 +1,12 @@
+# CQ3. What proportion of each severity group has a linked possible explanation?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT ?severity (COUNT(?event) AS ?events)
+       (SUM(?covered) AS ?withExplanation)
+       (ROUND(1000 * SUM(?covered) / COUNT(?event)) / 10 AS ?percent)
+WHERE {
+  { SELECT ?event ?severity (IF(COUNT(?why) > 0, 1, 0) AS ?covered) WHERE {
+      ?event a d:EventDefinition ; d:severity ?severity .
+      OPTIONAL { ?event d:describesCondition/d:hasPossibleExplanation ?why }
+    } GROUP BY ?event ?severity }
+} GROUP BY ?severity ORDER BY ?severity

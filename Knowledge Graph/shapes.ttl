@@ -1,120 +1,100 @@
-@prefix diag: <https://example.org/server-troubleshooting#> .
-@prefix shape: <https://example.org/server-troubleshooting/shapes/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix d: <https://example.org/dell-troubleshooting#> .
+@prefix noria: <https://w3id.org/noria/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix s: <https://example.org/dell-troubleshooting/shapes/> .
 
-# Population constraints, separate from OWL schema semantics. Classes and
-# relationship directions refer exclusively to the agreed local ontology.
-shape:EventDefinitionShape a sh:NodeShape ;
-    sh:targetClass diag:EventDefinition ; sh:nodeKind sh:IRI ;
-    sh:property [ sh:path diag:recordId ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:vendor ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:eventCode ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:eventNamespace ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:eventName ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:severity ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:explanation ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:causeCategory ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:sourceDocumentId ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:sourcePage ; sh:minCount 1 ; sh:datatype xsd:positiveInteger ] ;
-    sh:property [ sh:path diag:hasMessageTemplate ; sh:minCount 1 ; sh:class diag:MessageTemplate ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path diag:recommendsProcedure ; sh:minCount 1 ; sh:class diag:RecoveryProcedure ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path diag:hasCategory ; sh:class diag:EventCategory ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path diag:concernsComponentType ; sh:class diag:ComponentType ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path diag:hasPossibleCause ; sh:class diag:PossibleCause ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path diag:similarTo ; sh:class diag:EventDefinition ; sh:nodeKind sh:IRI ] .
+s:Event a sh:NodeShape ; sh:targetClass d:EventDefinition ;
+ sh:property [ sh:path d:eventCode ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ],
+ [ sh:path d:messageText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ],
+ [ sh:path d:severity ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ("Critical"^^xsd:string "Warning"^^xsd:string) ],
+ [ sh:path d:sourceDocumentId ; sh:minCount 1 ; sh:datatype xsd:string ],
+ [ sh:path d:sourcePage ; sh:minCount 1 ; sh:datatype xsd:positiveInteger ],
+ [ sh:path d:categoryText ; sh:datatype xsd:string ],
+ [ sh:path d:argumentText ; sh:datatype xsd:string ],
+ [ sh:path d:explanationText ; sh:datatype xsd:string ],
+ [ sh:path d:recommendedResponseText ; sh:datatype xsd:string ],
+ [ sh:path d:sourceEventText ; sh:datatype xsd:string ],
+ [ sh:path d:platformAlertText ; sh:datatype xsd:string ],
+ [ sh:path d:vendorMetadataText ; sh:datatype xsd:string ],
+ [ sh:path d:describesCondition ; sh:minCount 1 ; sh:maxCount 1 ; sh:class d:ReportedCondition ; sh:nodeKind sh:IRI ],
+ [ sh:path d:hasDocumentedResponse ; sh:minCount 1 ; sh:maxCount 1 ; sh:class d:RecoveryProcedure ; sh:nodeKind sh:IRI ] .
 
-shape:MessageTemplateShape a sh:NodeShape ;
-    sh:targetClass diag:MessageTemplate ; sh:nodeKind sh:IRI ;
-    sh:property [ sh:path diag:messageText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:messageArguments ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path [ sh:inversePath diag:hasMessageTemplate ] ; sh:minCount 1 ; sh:maxCount 1 ; sh:class diag:EventDefinition ] .
+s:Condition a sh:NodeShape ; sh:targetClass d:ReportedCondition ;
+ sh:property [ sh:path d:description ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ],
+ [ sh:path d:qualifierText ; sh:datatype xsd:string ],
+ [ sh:path d:concernsComponentType ; sh:class d:ComponentType ; sh:nodeKind sh:IRI ],
+ [ sh:path d:concernsTechnicalProperty ; sh:class d:TechnicalProperty ; sh:nodeKind sh:IRI ],
+ [ sh:path d:hasPossibleExplanation ; sh:class d:PossibleExplanation ; sh:nodeKind sh:IRI ],
+ [ sh:path d:describesAnomalyPattern ; sh:class noria:AnomalyPattern ; sh:nodeKind sh:IRI ] .
 
-shape:RecoveryProcedureShape a sh:NodeShape ;
-    sh:targetClass diag:RecoveryProcedure ; sh:nodeKind sh:IRI ;
-    sh:property [ sh:path diag:procedureText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:procedureLabel ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:considersCause ; sh:class diag:PossibleCause ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path diag:hasItem ; sh:class diag:ProcedureItem ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path diag:targetsComponentType ; sh:class diag:ComponentType ; sh:nodeKind sh:IRI ] .
+s:Explanation a sh:NodeShape ; sh:targetClass d:PossibleExplanation ;
+ sh:property [ sh:path d:description ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ],
+ [ sh:path d:qualifierText ; sh:datatype xsd:string ] .
 
-shape:PossibleCauseShape a sh:NodeShape ;
-    sh:targetClass diag:PossibleCause ; sh:nodeKind sh:IRI ;
-    sh:property [ sh:path diag:causeText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .
+s:Procedure a sh:NodeShape ; sh:targetClass d:RecoveryProcedure ;
+ sh:property [ sh:path d:procedureText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ],
+ [ sh:path d:containsInstruction ; sh:minCount 1 ; sh:class d:ProcedureInstruction ; sh:nodeKind sh:IRI ],
+ [ sh:path d:similarEvent ; sh:class d:RecoveryProcedure ; sh:nodeKind sh:IRI ] .
 
-shape:ComponentTypeShape a sh:NodeShape ;
-    sh:targetClass diag:ComponentType ; sh:nodeKind sh:IRI ;
-    sh:property [ sh:path diag:componentTypeName ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .
+s:Instruction a sh:NodeShape ; sh:targetClass d:ProcedureInstruction ;
+ sh:property [ sh:path [ sh:inversePath d:containsInstruction ] ; sh:minCount 1 ; sh:maxCount 1 ; sh:class d:RecoveryProcedure ],
+ [ sh:path d:instructionText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ],
+ [ sh:path d:instructionOrder ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:positiveInteger ],
+ [ sh:path d:instructionPath ; sh:datatype xsd:string ],
+ [ sh:path d:sourceStepLabel ; sh:datatype xsd:string ],
+ [ sh:path d:conditionText ; sh:datatype xsd:string ],
+ [ sh:path d:restrictionText ; sh:datatype xsd:string ],
+ [ sh:path d:toolText ; sh:datatype xsd:string ],
+ [ sh:path d:locationText ; sh:datatype xsd:string ],
+ [ sh:path d:appearsBefore ; sh:class d:ProcedureInstruction ; sh:nodeKind sh:IRI ],
+ [ sh:path d:requestsOperationType ; sh:class d:OperationType ; sh:nodeKind sh:IRI ],
+ [ sh:path d:targetsComponentType ; sh:class d:ComponentType ; sh:nodeKind sh:IRI ],
+ [ sh:path d:usesArtifactType ; sh:class d:TechnicalArtifactType ; sh:nodeKind sh:IRI ],
+ [ sh:path d:requestsArtifactType ; sh:class d:TechnicalArtifactType ; sh:nodeKind sh:IRI ],
+ [ sh:path d:investigatesExplanation ; sh:class d:PossibleExplanation ; sh:nodeKind sh:IRI ],
+ [ sh:path d:attemptsToCorrectExplanation ; sh:class d:PossibleExplanation ; sh:nodeKind sh:IRI ] .
 
-shape:EventCategoryShape a sh:NodeShape ;
-    sh:targetClass diag:EventCategory ; sh:nodeKind sh:IRI ;
-    sh:property [ sh:path diag:categoryName ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:hasBroaderCategory ; sh:class diag:EventCategory ; sh:nodeKind sh:IRI ] .
+s:ReusableConcept a sh:NodeShape ;
+ sh:property [ sh:path d:conceptId ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ],
+ [ sh:path d:name ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ],
+ [ sh:path d:description ; sh:datatype xsd:string ],
+ [ sh:path d:sourceDocumentId ; sh:datatype xsd:string ],
+ [ sh:path d:sourcePage ; sh:datatype xsd:positiveInteger ],
+ [ sh:path d:sourceQuote ; sh:datatype xsd:string ] .
 
-shape:ProcedureItemShape a sh:NodeShape ;
-    sh:targetClass diag:ProcedureItem ; sh:nodeKind sh:IRI ;
-    sh:property [ sh:path diag:itemText ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:itemOrder ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:positiveInteger ] ;
-    sh:property [ sh:path diag:sourceLabel ; sh:maxCount 1 ; sh:datatype xsd:string ] ;
-    sh:property [ sh:path diag:nestingLevel ; sh:maxCount 1 ; sh:datatype xsd:nonNegativeInteger ] ;
-    sh:property [ sh:path diag:investigatesCause ; sh:class diag:PossibleCause ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path diag:addressesCause ; sh:class diag:PossibleCause ; sh:nodeKind sh:IRI ] ;
-    sh:property [ sh:path [ sh:inversePath diag:hasItem ] ; sh:minCount 1 ; sh:maxCount 1 ; sh:class diag:RecoveryProcedure ] .
+s:Component a sh:NodeShape ; sh:targetClass d:ComponentType ; sh:node s:ReusableConcept ;
+ sh:property [ sh:path d:hasDocumentedPartType ; sh:class d:ComponentType ; sh:nodeKind sh:IRI ] .
+s:Property a sh:NodeShape ; sh:targetClass d:TechnicalProperty ; sh:node s:ReusableConcept .
+s:Operation a sh:NodeShape ; sh:targetClass d:OperationType ; sh:node s:ReusableConcept .
+s:Artifact a sh:NodeShape ; sh:targetClass d:TechnicalArtifactType ; sh:node s:ReusableConcept .
 
-# Global integrity tests avoid accepting structurally valid but mis-scoped
-# item-to-cause links or a cyclic/missing materialised category hierarchy.
-shape:GraphIntegrity a sh:NodeShape ;
-    sh:targetNode shape:GraphIntegrity ;
-    sh:sparql [
-        sh:message "recordId must be unique across explicit event definitions." ;
-        sh:select """
-          PREFIX diag: <https://example.org/server-troubleshooting#>
-          SELECT DISTINCT $this WHERE {
-            ?event diag:recordId ?id . ?other diag:recordId ?id . FILTER(?other != ?event)
-          }
-        """
-    ] ;
-    sh:sparql [
-        sh:message "Two printed items in one procedure must not have the same itemOrder." ;
-        sh:select """
-          PREFIX diag: <https://example.org/server-troubleshooting#>
-          SELECT DISTINCT $this WHERE {
-            ?procedure diag:hasItem ?item, ?other .
-            ?item diag:itemOrder ?order . ?other diag:itemOrder ?order . FILTER(?item != ?other)
-          }
-        """
-    ] ;
-    sh:sparql [
-        sh:message "An instruction may link only to a cause considered by its own procedure." ;
-        sh:select """
-          PREFIX diag: <https://example.org/server-troubleshooting#>
-          SELECT DISTINCT $this WHERE {
-            ?item ?property ?cause .
-            FILTER(?property IN (diag:investigatesCause, diag:addressesCause))
-            FILTER NOT EXISTS { ?procedure diag:hasItem ?item ; diag:considersCause ?cause . }
-          }
-        """
-    ] ;
-    sh:sparql [
-        sh:message "Category hierarchy must not contain cycles." ;
-        sh:select """
-          PREFIX diag: <https://example.org/server-troubleshooting#>
-          SELECT DISTINCT $this WHERE { ?category diag:hasBroaderCategory+ ?category . }
-        """
-    ] ;
-    sh:sparql [
-        sh:message "The symmetric similarTo reverse link must be materialised." ;
-        sh:select """
-          PREFIX diag: <https://example.org/server-troubleshooting#>
-          SELECT DISTINCT $this WHERE {
-            ?a diag:similarTo ?b . FILTER NOT EXISTS { ?b diag:similarTo ?a . }
-          }
-        """
-    ] ;
-    sh:sparql [
-        sh:message "similarTo must not have self-links under this project's population policy." ;
-        sh:select """
-          PREFIX diag: <https://example.org/server-troubleshooting#>
-          SELECT DISTINCT $this WHERE { ?a diag:similarTo ?a . }
-        """
-    ] .
+s:ComponentSubclasses a sh:NodeShape ;
+ sh:targetClass d:HardwareComponentType, d:FirmwareComponentType,
+   d:ProcessingComponentType, d:MemoryComponentType, d:CoolingComponentType,
+   d:StorageComponentType, d:PowerComponentType, d:InterconnectComponentType,
+   d:SecurityComponentType ;
+ sh:node s:ReusableConcept .
+s:ConditionSubclasses a sh:NodeShape ;
+ sh:targetClass d:AvailabilityCondition, d:ThresholdCondition, d:CompatibilityCondition,
+   d:IntegrityCondition, d:ErrorCondition ;
+ sh:property [ sh:path d:description ; sh:minCount 1 ; sh:datatype xsd:string ] .
+s:OperationSubclasses a sh:NodeShape ;
+ sh:targetClass d:DiagnosticOperationType, d:CorrectiveOperationType, d:ManagementOperationType ;
+ sh:node s:ReusableConcept .
+s:Threshold a sh:NodeShape ; sh:targetClass d:ThresholdCondition ;
+ sh:property [ sh:path d:comparisonOperator ; sh:datatype xsd:string ],
+ [ sh:path d:thresholdDirection ; sh:datatype xsd:string ],
+ [ sh:path d:thresholdLevel ; sh:datatype xsd:string ],
+ [ sh:path d:thresholdValue ; sh:datatype xsd:decimal ],
+ [ sh:path d:thresholdUnitText ; sh:datatype xsd:string ] .
+
+s:RelationshipEvidence a sh:NodeShape ; sh:targetClass owl:Axiom ;
+ sh:property [ sh:path owl:annotatedSource ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ],
+ [ sh:path owl:annotatedProperty ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ],
+ [ sh:path owl:annotatedTarget ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ],
+ [ sh:path d:evidenceQuote ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:minLength 1 ],
+ [ sh:path d:evidenceDocumentId ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ],
+ [ sh:path d:evidencePage ; sh:minCount 1 ; sh:datatype xsd:positiveInteger ],
+ [ sh:path d:mappingStatus ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ] .

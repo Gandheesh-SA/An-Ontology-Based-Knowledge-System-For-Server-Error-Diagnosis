@@ -1,0 +1,10 @@
+# CQ9. For each component type, what percentage of linked events are Critical?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT ?component (COUNT(?event) AS ?linkedEvents) (SUM(?flag) AS ?criticalEvents)
+       (ROUND(1000 * SUM(?flag) / COUNT(?event)) / 10 AS ?percent)
+WHERE {
+  { SELECT DISTINCT ?component ?event (IF(STR(?severity) = "Critical", 1, 0) AS ?flag) WHERE {
+      ?event d:severity ?severity ; d:describesCondition/d:concernsComponentType/d:name ?component .
+    } }
+} GROUP BY ?component ORDER BY DESC(?percent) ?component

@@ -1,0 +1,7 @@
+# CQ10. Which events report a condition and have no linked possible explanation?
+PREFIX d: <https://example.org/dell-troubleshooting#>
+
+SELECT DISTINCT ?code WHERE {
+  ?event d:eventCode ?code ; d:describesCondition ?condition .
+  FILTER NOT EXISTS { ?event d:describesCondition/d:hasPossibleExplanation ?why }
+} ORDER BY ?code

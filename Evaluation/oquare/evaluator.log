@@ -1,0 +1,21 @@
+Calculate OQuare metrics  --ontology /private/tmp/dell-oquare.mzE6Of/ontology.owl --reasoner HERMIT --outputFile /private/tmp/dell-oquare.mzE6Of/ontology_metrics.xml
+Inferece options:
+class assertions
+class hierarchy
+data property assertions
+data property hierarchy
+different individuals
+disjoint classes
+object property assertions
+object property hierarchy
+same individuals
+Running Hermit reasoner
+Classifying
+Classifying time in 33 msec
+Building Neo4j graph from ontology model...
+Graph builded in 1482 msec
+Number of nodes: 36
+Number of relationships: 60
+[1/23] Searching paths from leaves (maxDepth=8)...Oquare metrics calculated in 2814 msec.
+Results saved in: "/private/tmp/dell-oquare.mzE6Of/ontology_metrics.xml".
+Finish. Execution Time = 2916 msec

@@ -1,0 +1,19 @@
+{
+  "tool": "HermiT",
+  "input_ontology": "/Users/sagandheesh/Documents/1. Research/dell_test/ontology/ontology.owl",
+  "reasoner": "HermiT bundled with the official OQuaRE evaluator",
+  "owl2_dl_profile_conforms": true,
+  "profile_violations": 0,
+  "consistent": true,
+  "unsatisfiable_named_classes_excluding_owl_nothing": 0,
+  "loaded_axioms": 482,
+  "imports_declarations": 0,
+  "scope": "Logical validation of the ontology schema. This does not validate the populated knowledge graph or retrieval accuracy.",
+  "interpretation": "The ontology is logically consistent, and no named class was inferred to be unsatisfiable.",
+  "method": [
+    "Loaded ontology.owl with OWLAPI.",
+    "Checked conformance to the OWL 2 DL profile.",
+    "Created a HermiT reasoner.",
+    "Checked logical consistency and unsatisfiable named classes."
+  ]
+}
