@@ -1,4 +1,4 @@
-# Server Troubleshooting Knowledge Graph
+# An-Ontology-Based-Knowledge-System-For-Server-Error-Diagnosis
 
 An ontology and knowledge graph for organising documented server error events and their recommended troubleshooting responses. This repository contains the **first phase** of the research: a Dell PowerEdge catalogue dataset, its ontology, a populated RDF graph, and validation results.
 
